@@ -1,0 +1,32 @@
+{
+  "sermons": {
+    "fr": [
+      {
+        "title": "Renaître dans la Grâce",
+        "date": "07 Avril 2026",
+        "speaker": "Pasteur Samuel"
+      },
+      {
+        "title": "Foi Active, Vie Transformée",
+        "date": "31 Mars 2026",
+        "speaker": "Pasteur Ruth"
+      }
+    ],
+    "en": [
+      {
+        "title": "Born Again by Grace",
+        "date": "April 07, 2026",
+        "speaker": "Pastor Samuel"
+      },
+      {
+        "title": "Active Faith, Transformed Life",
+        "date": "March 31, 2026",
+        "speaker": "Pastor Ruth"
+      }
+    ]
+  },
+  "events": {
+    "fr": {},
+    "en": {}
+  }
+}
