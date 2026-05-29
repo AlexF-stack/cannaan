@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
+import { SiteLoader } from "@/components/site-loader";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 
 const siteUrl = getSiteUrl();
@@ -85,6 +86,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-[var(--font-body)] antialiased">
+        <SiteLoader />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
