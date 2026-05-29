@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { PlayCircle, MapPin, Clock } from "lucide-react";
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -151,6 +152,8 @@ export function EventsPage({ locale, dict }: { locale: Locale; dict: Dictionary 
           </div>
         </div>
       </section>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

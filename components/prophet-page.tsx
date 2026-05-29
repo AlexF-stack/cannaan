@@ -6,6 +6,7 @@ import { ArrowLeft, BookOpen, Heart, Award, Star, Globe } from "lucide-react";
 import Link from "next/link";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -146,6 +147,8 @@ export function ProphetPage({ locale, dict }: { locale: Locale; dict: Dictionary
           </motion.div>
         </div>
       </section>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

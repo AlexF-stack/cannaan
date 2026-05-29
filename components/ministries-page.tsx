@@ -6,6 +6,7 @@ import { Globe, HandHeart, HeartHandshake, Users, ArrowRight } from "lucide-reac
 import React from "react";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { ministries, ministryCopy } from "@/lib/content";
 import type { Dictionary, Locale } from "@/lib/i18n";
@@ -136,6 +137,8 @@ export function MinistriesPage({ locale, dict }: { locale: Locale; dict: Diction
           </motion.div>
         </div>
       </section>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

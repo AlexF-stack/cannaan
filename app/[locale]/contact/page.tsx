@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { ContactForm } from "@/components/contact-form";
 import { dictionary, isLocale } from "@/lib/i18n";
@@ -19,7 +20,7 @@ export default async function ContactPage({
     { icon: MapPin,  label: "Adresse",   value: dict.footer.mapText, color: "bg-blue-100 text-blue-600" },
     { icon: Clock,   label: "Culte",     value: dict.events.sunday,  color: "bg-amber-100 text-amber-600" },
     { icon: Mail,    label: "Email",     value: "contact@canaan.church", color: "bg-emerald-100 text-emerald-600" },
-    { icon: Phone,   label: "Téléphone", value: "+229 00 00 00 00",  color: "bg-rose-100 text-rose-600" },
+    { icon: Phone,   label: "Téléphone", value: "+229 01 66 73 47 34 / +229 01 67 52 22 28",  color: "bg-rose-100 text-rose-600" },
   ];
 
   return (
@@ -79,6 +80,8 @@ export default async function ContactPage({
 
         </div>
       </div>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

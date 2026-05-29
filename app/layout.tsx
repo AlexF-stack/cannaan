@@ -73,8 +73,8 @@ export default function RootLayout({
     url: "https://canaan.church",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "123 Avenue de la Grâce",
-      addressLocality: "Cotonou",
+      streetAddress: "Auditorium CIRC, derrière la Maternité Agblangandan",
+      addressLocality: "Agblangandan",
       postalCode: "0000",
       addressCountry: "BJ",
     },

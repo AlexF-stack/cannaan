@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { ministries, ministryCopy } from "@/lib/content";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -603,29 +604,7 @@ export function HomePage({
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="bg-slate-900 text-white px-6 py-16 lg:px-10">
-        <div className="mx-auto max-w-7xl grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <Image src="/images/logo.png" alt="Canaan" width={140} height={48} className="h-10 w-auto object-contain" />
-            <p className="mt-4 text-slate-400 text-sm max-w-xs">{dict.footer.churchTagline}</p>
-          </div>
-          <div>
-            <h4 className="font-bold text-amber-400 mb-4">{dict.footer.quickLinks}</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              {[dict.nav.about, dict.nav.ministries, dict.nav.resources, dict.nav.contact].map((l) => (
-                <li key={l}><a href="#" className="hover:text-white transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-amber-400 mb-4">{dict.footer.findUs}</h4>
-            <p className="text-sm text-slate-400 flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" />{dict.footer.mapText}</p>
-          </div>
-        </div>
-        <div className="mx-auto max-w-7xl mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Église Canaan. Tous droits réservés.
-        </div>
-      </footer>
+      <Footer locale={locale} dict={dict} />
 
       {/* Sermon Player Modal */}
       <AnimatePresence>

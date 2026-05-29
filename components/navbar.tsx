@@ -50,7 +50,7 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <Link href={`/${locale}`} className="flex items-center gap-4 group">
               <div className="relative h-14 w-auto">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/canaan_logo_1779631751389.png"
                   alt={CHURCH_NAME}
                   width={160}
                   height={56}

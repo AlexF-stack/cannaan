@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
@@ -8,8 +7,10 @@ import { Download, Headphones, Pause, Play, X } from "lucide-react";
 
 import { CountdownTimer } from "@/components/countdown-timer";
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import SummaryEditorModal from "@/components/summary-editor-modal";
+import MapsSection from "@/components/maps-section";
 import { audioTeachings, type AudioTeaching } from "@/lib/audio";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -42,6 +43,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
   const [isEditing, setIsEditing] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [launchDate, setLaunchDate] = useState<string | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -69,6 +71,44 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
       .then((data: { launchDate?: string }) => setLaunchDate(data.launchDate ?? null))
       .catch(() => setLaunchDate(null));
   }, []);
+
+  // Auto‑scroll carousel sur mobile avec pause lors de l'interaction
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.innerWidth >= 768) return; // uniquement sur petits écrans
+    const container = galleryRef.current;
+    if (!container) return;
+
+    let isPaused = false;
+    let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const pauseScroll = () => {
+      isPaused = true;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => { isPaused = false; }, 2000);
+    };
+
+    container.addEventListener("touchstart", pauseScroll, { passive: true });
+    container.addEventListener("mousedown", pauseScroll);
+
+    let scrollPos = container.scrollLeft;
+    const step = 1;
+    const interval = setInterval(() => {
+      if (isPaused || !container) return;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      scrollPos += step;
+      if (scrollPos >= maxScroll) scrollPos = 0;
+      container.scrollTo({ left: scrollPos, behavior: "smooth" });
+    }, 30);
+
+    return () => {
+      clearInterval(interval);
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      container.removeEventListener("touchstart", pauseScroll);
+      container.removeEventListener("mousedown", pauseScroll);
+    };
+  }, []);
+
 
   const togglePlay = () => {
     if (!audioRef.current) return;
@@ -307,7 +347,10 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               La vie de l'eglise en images
             </motion.h2>
           </motion.div>
-          <div className="columns-1 gap-6 space-y-6 sm:columns-2 lg:columns-3">
+          <div
+            ref={galleryRef}
+            className="columns-1 gap-6 space-y-6 sm:columns-2 lg:columns-3 overflow-x-auto scrollbar-hide"
+          >
             {galleryImages.map((img, index) => (
               <motion.div
                 key={img.src}
@@ -329,6 +372,8 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               </motion.div>
             ))}
           </div>
+          {/* Maps Section */}
+          <MapsSection />
         </div>
       </section>
 
@@ -367,6 +412,8 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
         currentSummary={summary}
         onSave={saveSummary}
       />
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

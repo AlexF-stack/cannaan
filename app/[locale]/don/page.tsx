@@ -3,6 +3,7 @@ import { CreditCard, Landmark, ShieldCheck, ArrowLeft, Heart } from "lucide-reac
 import { notFound } from "next/navigation";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { dictionary, isLocale } from "@/lib/i18n";
 
@@ -108,6 +109,8 @@ export default async function DonationPage({
           </div>
         </div>
       </div>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

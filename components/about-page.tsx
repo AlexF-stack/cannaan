@@ -6,6 +6,7 @@ import { motion, type Variants } from "framer-motion";
 import { CalendarDays, Globe, HandHeart, HeartHandshake, MapPin, Users, ArrowRight } from "lucide-react";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -175,6 +176,8 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
           </div>
         </div>
       </section>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }

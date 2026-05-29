@@ -155,7 +155,7 @@ export const dictionary: Record<Locale, Dictionary> = {
       quickLinks: "Liens Rapides",
       findUs: "Nous trouver",
       churchTagline: "Église locale - Foi, Famille, Impact.",
-      mapText: "123 Avenue de la Grâce, Cotonou (Google Maps simulé)",
+      mapText: "Auditorium CIRC, derrière la Maternité Agblangandan, Bénin",
     },
     contact: {
       title: "Nous Contacter",
@@ -247,7 +247,7 @@ export const dictionary: Record<Locale, Dictionary> = {
       quickLinks: "Quick Links",
       findUs: "Find us",
       churchTagline: "Local church - Faith, Family, Impact.",
-      mapText: "123 Grace Avenue, Cotonou (Google Maps simulated)",
+      mapText: "CIRC Auditorium, behind the Agblangandan Maternity, Benin",
     },
     contact: {
       title: "Contact Us",

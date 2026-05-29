@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, Headphones, Play } from "lucide-react";
 
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { audioTeachings } from "@/lib/audio";
 import type { Dictionary, Locale } from "@/lib/i18n";
@@ -89,6 +90,8 @@ export function TeachingsPage({ locale, dict }: { locale: Locale; dict: Dictiona
           </div>
         </div>
       </section>
+
+      <Footer locale={locale} dict={dict} />
     </main>
   );
 }
