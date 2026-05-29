@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://canaan.church";
+  const baseUrl = getSiteUrl();
 
   return locales.flatMap((locale) => [
     {

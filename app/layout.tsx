@@ -3,8 +3,10 @@ import { Inter, Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
-import { SiteLoader } from "@/components/site-loader";
+import { getSiteUrl } from "@/lib/site-url";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+
+const siteUrl = getSiteUrl();
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +20,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://canaan.church"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Canaan | Église Locale",
     template: "%s | Canaan",
@@ -29,13 +31,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Canaan | Église Locale",
     description: "Une communauté vibrante pour expérimenter la présence de Dieu.",
-    url: "https://canaan.church",
+    url: siteUrl,
     siteName: "Canaan",
     locale: "fr_FR",
     type: "website",
     images: [
       {
-        url: "https://canaan.church/api/og",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: "Église Canaan",
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Canaan | Église Locale",
     description: "Une communauté vibrante pour expérimenter la présence de Dieu.",
-    images: ["https://canaan.church/api/og"],
+    images: ["/api/og"],
   },
   robots: {
     index: true,
@@ -70,7 +72,7 @@ export default function RootLayout({
     "@type": "Church",
     name: "Canaan",
     description: "Une communauté vibrante pour expérimenter la présence de Dieu.",
-    url: "https://canaan.church",
+    url: siteUrl,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Auditorium CIRC, derrière la Maternité Agblangandan",
@@ -83,7 +85,6 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-[var(--font-body)] antialiased">
-        <SiteLoader />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
