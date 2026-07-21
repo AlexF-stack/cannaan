@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, PlayCircle, Heart } from "lucide-react";
 
-import { CHURCH_NAME, getBrand } from "@/lib/brand";
+import { CHURCH_NAME, getBrand, LOGO_SRC } from "@/lib/brand";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getFooterLinks } from "@/lib/navigation";
 
@@ -23,7 +23,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <Link href={`/${locale}`} className="group flex w-fit items-center gap-4">
               <div className="relative h-14 w-auto rounded-lg border border-white/5 bg-slate-900/50 p-1.5">
                 <Image
-                  src="/images/canaan_logo_1779631751389.png"
+                  src={LOGO_SRC}
                   alt={CHURCH_NAME}
                   width={120}
                   height={42}

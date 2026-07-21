@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { LOGO_SRC } from "@/lib/brand";
 import { useLocaleContext } from "@/lib/use-locale";
 
 export function SiteLoader() {
@@ -128,7 +129,7 @@ export function SiteLoader() {
                 className="relative w-28 h-28 flex items-center justify-center bg-slate-900/60 rounded-full backdrop-blur-sm p-4 border border-white/5 shadow-2xl"
               >
                 <Image
-                  src="/images/canaan_logo_1779631751389.png"
+                  src={LOGO_SRC}
                   alt="CIRC Canaan Logo"
                   width={90}
                   height={90}

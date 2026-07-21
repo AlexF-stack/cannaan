@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, HandHeart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CHURCH_NAME, getBrand } from "@/lib/brand";
+import { CHURCH_NAME, getBrand, LOGO_SRC } from "@/lib/brand";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getMainNavLinks } from "@/lib/navigation";
 import { swapLocalePath } from "@/lib/use-locale";
@@ -47,7 +47,7 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <Link href={`/${locale}`} className="flex items-center gap-4 group">
               <div className="relative h-14 w-auto">
                 <Image
-                  src="/images/canaan_logo_1779631751389.png"
+                  src={LOGO_SRC}
                   alt={CHURCH_NAME}
                   width={160}
                   height={56}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+import { LOGO_SRC } from "@/lib/brand";
 import { useLocaleContext } from "@/lib/use-locale";
 
 /** Chargement animé lors des transitions entre pages. */
@@ -18,7 +19,7 @@ export default function Loading() {
 
         <div className="absolute flex h-14 w-14 animate-pulse items-center justify-center">
           <Image
-            src="/images/canaan_logo_1779631751389.png"
+            src={LOGO_SRC}
             alt="CIRC Cannaan"
             width={56}
             height={56}
