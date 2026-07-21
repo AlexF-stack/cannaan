@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-circ-blue: #1a3a7a;
-  --color-circ-blue-light: #2b5cb8;
-  --color-circ-blue-dark: #0c1f45;
-  --color-circ-red: #c41e3a;
-  --color-circ-red-light: #e8364f;
-  --color-circ-gold: #e8a317;
-  --color-circ-gold-light: #f5c842;
-  --color-circ-navy: #070b13;
+  /* Couleurs extraites du logo CIRC (rouge éclaté + jaune + bleu globe) */
+  --color-circ-blue: #0057d8;
+  --color-circ-blue-light: #1a73ff;
+  --color-circ-blue-dark: #003087;
+  --color-circ-red: #e10028;
+  --color-circ-red-light: #ff2d4d;
+  --color-circ-gold: #ffc400;
+  --color-circ-gold-light: #ffd54f;
+  --color-circ-navy: #0a1628;
 }
 
 :root {
@@ -16,14 +17,14 @@
   --foreground: 222 47% 11%;
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
-  --primary: 221 65% 29%;
+  --primary: 214 100% 42%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 42 82% 50%;
+  --secondary: 45 100% 50%;
   --secondary-foreground: 222 47% 11%;
   --muted: 210 40% 96%;
   --muted-foreground: 215 19% 35%;
   --border: 214 32% 91%;
-  --ring: 221 65% 29%;
+  --ring: 214 100% 42%;
   --radius: 0.75rem;
   --section-y: 6rem;
   --section-gap: 2rem;
@@ -89,7 +90,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-circ-blue-light);
+  color: var(--color-circ-red);
 }
 
 /* ── Sections ── */
@@ -118,7 +119,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-circ-blue-light);
+  color: var(--color-circ-red);
   margin-bottom: 1rem;
 }
 
@@ -205,9 +206,9 @@ body {
 }
 
 .btn-outline:hover {
-  border-color: var(--color-circ-blue-light);
-  color: var(--color-circ-blue);
-  background: #f8fafc;
+  border-color: var(--color-circ-red);
+  color: var(--color-circ-red);
+  background: #fff5f5;
 }
 
 /* ── Cartes & surfaces ── */

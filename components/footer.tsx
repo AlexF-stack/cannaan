@@ -35,7 +35,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                   {brand.line1}
                 </span>
-                <span className="font-heading text-xl font-extrabold tracking-tight text-circ-blue-light">
+                <span className="font-heading text-xl font-extrabold tracking-tight text-circ-gold-light">
                   {brand.line2}
                 </span>
               </div>

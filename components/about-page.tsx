@@ -46,7 +46,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
                   className="object-cover object-top"
                 />
               </div>
-              <div className="absolute -bottom-6 right-6 rounded-2xl bg-circ-blue px-6 py-4 text-white shadow-xl">
+              <div className="absolute -bottom-6 right-6 rounded-2xl bg-circ-red px-6 py-4 text-white shadow-xl">
                 <div className="font-[var(--font-heading)] text-3xl font-extrabold">20+</div>
                 <div className="text-xs text-blue-200 mt-0.5">{p.yearsLabel}</div>
               </div>
@@ -72,7 +72,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               <motion.div variants={fadeUp} className="mt-8">
                 <Link
                   href={`/${locale}/prophete`}
-                  className="inline-flex items-center gap-2 rounded-full bg-circ-blue px-7 py-3 text-sm font-bold text-white hover:bg-circ-blue-light transition-colors shadow-md"
+                  className="inline-flex items-center gap-2 rounded-full bg-circ-red px-7 py-3 text-sm font-bold text-white hover:bg-circ-red-light transition-colors shadow-md"
                 >
                   {p.learnMoreProphet} <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -102,7 +102,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-3xl bg-circ-blue p-8 text-white"
+              className="rounded-3xl bg-circ-red p-8 text-white"
             >
               <Globe className="h-10 w-10 text-blue-200 mb-5" />
               <h3 className="font-[var(--font-heading)] text-2xl font-bold mb-4">{dict.identity.visionTitle}</h3>

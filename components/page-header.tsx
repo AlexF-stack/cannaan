@@ -18,8 +18,8 @@ export function PageHeader({ title, subtitle, image, badge }: PageHeaderProps) {
   return (
     <div className="relative flex h-[48vh] min-h-[360px] items-end overflow-hidden">
       <Image src={image} alt={title} fill sizes="100vw" className="object-cover object-center" priority />
-      <div className="absolute inset-0 bg-gradient-to-t from-circ-blue-dark/92 via-circ-blue/55 to-circ-blue-dark/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-circ-navy/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-circ-navy/95 via-circ-navy/50 to-circ-red/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-circ-navy/55 to-transparent" />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 lg:px-10">
         {badge && (
           <motion.div

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { LOGO_SRC } from "@/lib/brand";
+import { LOGO_ON_DARK_SRC } from "@/lib/brand";
 
 /** Chargement léger lors des transitions entre pages (sans hook client lourd). */
 export default function Loading() {
@@ -14,7 +14,7 @@ export default function Loading() {
 
         <div className="absolute flex h-14 w-14 animate-pulse items-center justify-center">
           <Image
-            src={LOGO_SRC}
+            src={LOGO_ON_DARK_SRC}
             alt="CIRC Cannaan"
             width={56}
             height={56}

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { LOGO_SRC } from "@/lib/brand";
+import { LOGO_ON_DARK_SRC } from "@/lib/brand";
 import { defaultLocale, isLocale } from "@/lib/i18n";
 import { getPageCopy } from "@/lib/i18n-pages";
 
@@ -134,7 +134,7 @@ export function SiteLoader() {
               className="relative w-28 h-28 flex items-center justify-center bg-slate-900/60 rounded-full backdrop-blur-sm p-4 border border-white/5 shadow-2xl"
             >
               <Image
-                src={LOGO_SRC}
+                src={LOGO_ON_DARK_SRC}
                 alt="CIRC Canaan Logo"
                 width={90}
                 height={90}

@@ -189,13 +189,13 @@ export function HomePage({
         <Image src="/images/peuple_2.jpg" alt={hp.heroAlt} fill sizes="100vw" className="object-cover object-center" priority />
 
         {/* Multi-layer overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-circ-blue-dark/82 via-circ-blue-dark/50 to-circ-navy/75" />
-        <div className="absolute inset-0 bg-gradient-to-t from-circ-navy/90 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-circ-navy/88 via-circ-navy/45 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-circ-navy via-transparent to-transparent" />
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <Orb cx="15%" cy="30%" r={280} color="bg-circ-blue-light/25" delay={0} disabled={reduced} />
-          <Orb cx="80%" cy="20%" r={200} color="bg-circ-gold/15" delay={1.5} disabled={reduced} />
-          <Orb cx="60%" cy="75%" r={240} color="bg-circ-red/10" delay={3} disabled={reduced} />
+          <Orb cx="15%" cy="30%" r={280} color="bg-circ-red/15" delay={0} disabled={reduced} />
+          <Orb cx="80%" cy="20%" r={200} color="bg-circ-gold/20" delay={1.5} disabled={reduced} />
+          <Orb cx="60%" cy="75%" r={240} color="bg-circ-blue-light/15" delay={3} disabled={reduced} />
         </div>
 
         {/* Diagonal grid overlay */}
@@ -364,7 +364,7 @@ export function HomePage({
             <div className="relative overflow-hidden rounded-3xl aspect-[4/5] shadow-2xl">
               <Image src="/images/prophets.jpg" alt={ap.prophetsAlt} fill className="object-cover object-top" />
             </div>
-            <div className="absolute -bottom-6 -right-6 rounded-2xl bg-circ-blue px-6 py-4 text-white shadow-xl">
+            <div className="absolute -bottom-6 -right-6 rounded-2xl bg-circ-red px-6 py-4 text-white shadow-xl">
               <div className="font-heading text-3xl font-extrabold">20+</div>
               <div className="text-xs text-blue-200 mt-0.5">{ap.yearsLabel}</div>
             </div>
@@ -402,7 +402,7 @@ export function HomePage({
               ))}
             </div>
             <div className="flex flex-col gap-4">
-              <div className="rounded-2xl bg-circ-blue p-8 text-white">
+              <div className="rounded-2xl bg-circ-red p-8 text-white">
                 <CalendarDays className="h-8 w-8 text-blue-200 mb-4" />
                 <h3 className="font-heading text-xl font-bold">{dict.events.mainTitle}</h3>
                 <p className="mt-2 text-blue-100 text-sm font-normal">{dict.events.sunday}</p>
@@ -434,11 +434,11 @@ export function HomePage({
             ].map(({ icon: Icon, tone, title, text }) => (
               <div
                 key={title}
-                className={`rounded-3xl p-8 ${tone === "blue" ? "bg-circ-blue text-white" : "bg-circ-gold"}`}
+                className={`rounded-3xl p-8 ${tone === "blue" ? "bg-circ-red text-white" : "bg-circ-gold"}`}
               >
-                <Icon className={`h-10 w-10 mb-6 ${tone === "blue" ? "text-blue-200" : "text-slate-900"}`} />
+                <Icon className={`h-10 w-10 mb-6 ${tone === "blue" ? "text-red-200" : "text-slate-900"}`} />
                 <h3 className={`font-heading text-2xl font-bold mb-4 ${tone === "gold" ? "text-slate-900" : ""}`}>{title}</h3>
-                <p className={`leading-relaxed text-sm font-normal ${tone === "blue" ? "text-blue-100" : "text-slate-800"}`}>{text}</p>
+                <p className={`leading-relaxed text-sm font-normal ${tone === "blue" ? "text-red-100" : "text-slate-800"}`}>{text}</p>
               </div>
             ))}
             <div className="rounded-3xl bg-circ-navy p-8 text-white">
@@ -463,7 +463,7 @@ export function HomePage({
         <div className="page-container">
           <div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <SectionHeading label={hp.ministriesSection} title={dict.ministries.title} />
-            <a href={`/${locale}/ministries`} className="inline-flex items-center gap-2 text-sm font-bold text-circ-blue hover:gap-3 transition-all shrink-0">
+            <a href={`/${locale}/ministries`} className="inline-flex items-center gap-2 text-sm font-bold text-circ-red hover:gap-3 transition-all shrink-0">
               {hp.viewAllMinistries} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -509,7 +509,7 @@ export function HomePage({
       </section>
 
       {/* ── DON ── */}
-      <section className="page-section relative overflow-hidden bg-circ-blue">
+      <section className="page-section relative overflow-hidden bg-circ-red">
         <div className="absolute inset-0 bg-[url('/images/adoration1.jpg')] bg-cover bg-center opacity-10" />
         <div className="page-container relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -548,7 +548,7 @@ export function HomePage({
             <SectionHeading label={hp.contactLabel} title={hp.joinTitle} subtitle={dict.contact.subtitle} />
             <div className="mt-8 space-y-4">
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-circ-blue/10 flex items-center justify-center"><MapPin className="h-5 w-5 text-circ-blue" /></div>
+                <div className="h-10 w-10 rounded-full bg-circ-red/10 flex items-center justify-center"><MapPin className="h-5 w-5 text-circ-red" /></div>
                 <span className="text-slate-700">{dict.footer.mapText}</span>
               </div>
               <div className="flex items-center gap-4">
@@ -556,7 +556,7 @@ export function HomePage({
                 <span className="text-slate-700">{dict.events.sunday}</span>
               </div>
             </div>
-            <Link href={`/${locale}/contact`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-circ-blue px-8 py-3.5 text-sm font-bold text-white hover:bg-circ-blue-light transition-colors shadow-lg">
+            <Link href={`/${locale}/contact`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-circ-red px-8 py-3.5 text-sm font-bold text-white hover:bg-circ-red-light transition-colors shadow-lg">
               {hp.joinContact} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

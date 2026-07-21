@@ -59,7 +59,7 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
                   {brand.line1}
                 </span>
-                <span className="text-xl font-extrabold text-circ-blue font-heading leading-tight tracking-tight">
+                <span className="text-xl font-extrabold text-circ-red font-heading leading-tight tracking-tight">
                   {brand.line2}
                 </span>
               </div>
@@ -71,7 +71,7 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="relative px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-circ-blue group"
+                  className="relative px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-circ-red group"
                 >
                   {l.label}
                   <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-circ-gold rounded-full transition-all duration-300 group-hover:w-3/4" />
@@ -82,13 +82,13 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             {/* Right */}
             <div className="hidden md:flex items-center gap-3">
               <div className="flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold">
-                <Link href={swapLocalePath(pathname, "fr")} className={cn("px-1.5 transition-colors", locale === "fr" ? "text-circ-blue" : "text-slate-400 hover:text-slate-700")}>FR</Link>
+                <Link href={swapLocalePath(pathname, "fr")} className={cn("px-1.5 transition-colors", locale === "fr" ? "text-circ-red" : "text-slate-400 hover:text-slate-700")}>FR</Link>
                 <span className="text-slate-300">|</span>
-                <Link href={swapLocalePath(pathname, "en")} className={cn("px-1.5 transition-colors", locale === "en" ? "text-circ-blue" : "text-slate-400 hover:text-slate-700")}>EN</Link>
+                <Link href={swapLocalePath(pathname, "en")} className={cn("px-1.5 transition-colors", locale === "en" ? "text-circ-red" : "text-slate-400 hover:text-slate-700")}>EN</Link>
               </div>
               <Link
                 href={`/${locale}/don`}
-                className="group relative overflow-hidden rounded-full bg-circ-blue px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-circ-blue/20 transition-all hover:bg-circ-blue-light hover:shadow-circ-blue/30"
+                className="group relative overflow-hidden rounded-full bg-circ-red px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-circ-red/25 transition-all hover:bg-circ-red-light hover:shadow-circ-red/35"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <HandHeart className="h-4 w-4" />
@@ -129,20 +129,20 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                   key={l.label}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center rounded-xl px-4 py-3 text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-circ-blue transition-colors"
+                  className="flex items-center rounded-xl px-4 py-3 text-sm font-bold text-slate-600 hover:bg-red-50 hover:text-circ-red transition-colors"
                 >
                   {l.label}
                 </Link>
               ))}
               <div className="pt-3 pb-1 mt-2 border-t border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-3 text-sm font-bold">
-                  <Link href={swapLocalePath(pathname, "fr")} className={cn("transition-colors", locale === "fr" ? "text-circ-blue" : "text-slate-400")}>FR</Link>
-                  <Link href={swapLocalePath(pathname, "en")} className={cn("transition-colors", locale === "en" ? "text-circ-blue" : "text-slate-400")}>EN</Link>
+                  <Link href={swapLocalePath(pathname, "fr")} className={cn("transition-colors", locale === "fr" ? "text-circ-red" : "text-slate-400")}>FR</Link>
+                  <Link href={swapLocalePath(pathname, "en")} className={cn("transition-colors", locale === "en" ? "text-circ-red" : "text-slate-400")}>EN</Link>
                 </div>
                 <Link
                   href={`/${locale}/don`}
                   onClick={() => setOpen(false)}
-                  className="rounded-full bg-circ-blue px-5 py-2 text-sm font-bold text-white shadow-md"
+                  className="rounded-full bg-circ-red px-5 py-2 text-sm font-bold text-white shadow-md"
                 >
                   {dict.nav.donate}
                 </Link>
