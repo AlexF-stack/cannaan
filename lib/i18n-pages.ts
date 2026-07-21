@@ -17,6 +17,7 @@ export type PageCopy = {
     liveNow: string;
     selected: string;
     recentTeachings: string;
+    close: string;
   };
   loader: { skip: string; tagline: string };
   whatsapp: {
@@ -132,15 +133,25 @@ export type PageCopy = {
     statsCities: string;
     discover: string;
     identitySection: string;
+    identityTitle: string;
     ministriesSection: string;
+    viewAllMinistries: string;
     mediaSection: string;
     sermonsSection: string;
+    allMessages: string;
     joinTitle: string;
     joinContact: string;
+    contactLabel: string;
     sermonModalSummary: string;
     sermonModalPlayer: string;
     welcomeFamily: string;
     secureDesc: string;
+    heroAlt: string;
+    worshipAlt: string;
+    churchAlt: string;
+    locationTitle: string;
+    closeModal: string;
+    sermonSummaryFallback: string;
   };
   contactPage: {
     address: string;
@@ -190,6 +201,7 @@ export const pageCopy: Record<Locale, PageCopy> = {
       liveNow: "En direct",
       selected: "SÉLECTIONNÉ",
       recentTeachings: "Enseignements récents",
+      close: "Fermer",
     },
     loader: {
       skip: "Passer",
@@ -317,15 +329,25 @@ export const pageCopy: Record<Locale, PageCopy> = {
       statsCities: "Villes impactées",
       discover: "Découvrir",
       identitySection: "Notre Identité",
+      identityTitle: "Vision, Mission & Valeurs",
       ministriesSection: "Ministères",
+      viewAllMinistries: "Voir tous les ministères",
       mediaSection: "Médiathèque",
       sermonsSection: "Derniers Messages",
+      allMessages: "Tous les messages",
       joinTitle: "Rejoignez-nous",
       joinContact: "Nous Contacter",
+      contactLabel: "Contact",
       sermonModalSummary: "Résumé du message",
       sermonModalPlayer: "Lecteur Média",
       welcomeFamily: "Bienvenue dans notre famille",
       secureDesc: "Transactions cryptées et protégées",
+      heroAlt: "Centre International de Réveil Canaan",
+      worshipAlt: "Adoration Canaan",
+      churchAlt: "Église Canaan",
+      locationTitle: "CIRC Cannaan — Agblangandan",
+      closeModal: "Fermer",
+      sermonSummaryFallback: "Le résumé détaillé de ce message sera disponible prochainement.",
     },
     contactPage: {
       address: "Adresse",
@@ -373,6 +395,7 @@ export const pageCopy: Record<Locale, PageCopy> = {
       liveNow: "Live now",
       selected: "SELECTED",
       recentTeachings: "Recent teachings",
+      close: "Close",
     },
     loader: {
       skip: "Skip",
@@ -500,15 +523,25 @@ export const pageCopy: Record<Locale, PageCopy> = {
       statsCities: "Cities impacted",
       discover: "Discover",
       identitySection: "Our Identity",
+      identityTitle: "Vision, Mission & Values",
       ministriesSection: "Ministries",
+      viewAllMinistries: "View all ministries",
       mediaSection: "Media Library",
       sermonsSection: "Latest Messages",
+      allMessages: "All messages",
       joinTitle: "Join us",
       joinContact: "Contact Us",
+      contactLabel: "Contact",
       sermonModalSummary: "Message summary",
       sermonModalPlayer: "Media Player",
       welcomeFamily: "Welcome to our family",
       secureDesc: "Encrypted and protected transactions",
+      heroAlt: "International Revival Center Cannaan",
+      worshipAlt: "Cannaan worship",
+      churchAlt: "Cannaan Church",
+      locationTitle: "CIRC Cannaan — Agblangandan",
+      closeModal: "Close",
+      sermonSummaryFallback: "The detailed summary of this message will be available soon.",
     },
     contactPage: {
       address: "Address",

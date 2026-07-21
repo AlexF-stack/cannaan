@@ -393,7 +393,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
             <button
               className="absolute right-6 top-6 text-white/50 transition-colors hover:text-white"
               onClick={() => setSelectedImage(null)}
-              aria-label="Fermer"
+              aria-label={common.close}
             >
               <X className="h-8 w-8" />
             </button>

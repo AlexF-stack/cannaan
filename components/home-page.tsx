@@ -101,6 +101,7 @@ export function HomePage({
   sermonsList: SermonPreview[];
 }) {
   const hp = getPageCopy(locale).homePage;
+  const ap = getPageCopy(locale).aboutPage;
   const common = getPageCopy(locale).common;
   const [realSermons, setRealSermons] = useState<SermonPreview[]>(sermonsList);
   const [selectedSermon, setSelectedSermon] = useState<SermonPreview | null>(null);
@@ -113,7 +114,7 @@ export function HomePage({
   const [volume, setVolume] = useState(0.8);
 
   useEffect(() => {
-    fetch("/api/audio/list")
+    fetch(`/api/audio/list?locale=${locale}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -121,7 +122,7 @@ export function HomePage({
         }
       })
       .catch((err) => console.error("Error fetching real sermons:", err));
-  }, []);
+  }, [locale]);
 
   const handleSermonClick = (sermon: SermonPreview) => {
     setSelectedSermon(sermon);
@@ -186,7 +187,7 @@ export function HomePage({
       ══════════════════════════════════════════ */}
       <section id="live" className="relative flex min-h-screen flex-col justify-center overflow-hidden">
         {/* Background photo */}
-        <Image src="/images/peuple_2.jpg" alt="Centre International de Réveil Canaan" fill sizes="100vw" className="object-cover object-center" priority />
+        <Image src="/images/peuple_2.jpg" alt={hp.heroAlt} fill sizes="100vw" className="object-cover object-center" priority />
 
         {/* Multi-layer overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/90 via-blue-950/60 to-slate-900/80" />
@@ -374,10 +375,10 @@ export function HomePage({
             className="mb-20 max-w-4xl mx-auto text-center"
           >
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-6">
-              <span className="block h-0.5 w-8 bg-amber-400" /> Qui sommes-nous ? <span className="block h-0.5 w-8 bg-amber-400" />
+              <span className="block h-0.5 w-8 bg-amber-400" /> {ap.whoTitle} <span className="block h-0.5 w-8 bg-amber-400" />
             </div>
             <h2 className="font-[var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-relaxed">
-              Le Centre International de Réveil - <span className="text-blue-600">CANAAN</span> est un ministère d'évangélisation et de formation des leaders pour la conquête des nations, créé en <span className="text-amber-500">2003</span> sous l'inspiration divine par <span className="text-blue-600">Ithiel DOSSOU</span>.
+              {ap.whoHeading}
             </h2>
           </motion.div>
 
@@ -386,27 +387,27 @@ export function HomePage({
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="relative">
             <div className="absolute -top-4 -left-4 h-full w-full rounded-3xl border-2 border-amber-400/30" />
             <div className="relative overflow-hidden rounded-3xl aspect-[4/5] shadow-2xl">
-              <Image src="/images/prophets.jpg" alt="Prophète Ithiel & Mykem Dossou" fill className="object-cover object-top" />
+              <Image src="/images/prophets.jpg" alt={ap.prophetsAlt} fill className="object-cover object-top" />
             </div>
             <div className="absolute -bottom-6 -right-6 rounded-2xl bg-blue-600 px-6 py-4 text-white shadow-xl">
               <div className="font-[var(--font-heading)] text-3xl font-extrabold">20+</div>
-              <div className="text-xs text-blue-200 mt-0.5">ans de ministère</div>
+              <div className="text-xs text-blue-200 mt-0.5">{ap.yearsLabel}</div>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}>
-            <span className="section-label">Nos Visionnaires</span>
+            <span className="section-label">{ap.visionariesTitle}</span>
             <h2 className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900 lg:text-5xl">
-              Prophète Ithiel <span className="text-blue-500">&amp;</span> Mykem Dossou
+              {ap.visionariesNames}
             </h2>
             <div className="mt-4 h-1 w-16 bg-amber-400 rounded-full" />
             <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Père fondateur des églises Canaan, le Saint-Esprit l'utilise pour transformer une multitude d'hommes et de femmes en de véritables disciples de Christ.
+              {ap.visionaryP1}
             </p>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Avec une vision claire et un dévouement total, le couple pastoral guide notre communauté vers une relation authentique avec Dieu — impactant nations, familles et sphères d'influence.
+              {ap.visionaryP2}
             </p>
             <Link href={`/${locale}/prophete`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-blue-600 transition-all hover:scale-105">
-              En savoir plus sur le Prophète <ArrowRight className="h-4 w-4" />
+              {ap.learnMoreProphet} <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
           </div>
@@ -418,7 +419,7 @@ export function HomePage({
         <div className="mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-12 grid lg:grid-cols-2 gap-8 items-end">
             <div>
-              <motion.span variants={fadeUp} className="section-label">Programme</motion.span>
+              <motion.span variants={fadeUp} className="section-label">{ap.programLabel}</motion.span>
               <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">{dict.events.title}</motion.h2>
             </div>
             <motion.p variants={fadeUp} className="text-slate-600 text-lg">{dict.events.mainDescription}</motion.p>
@@ -461,7 +462,7 @@ export function HomePage({
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
             <motion.span variants={fadeUp} className="section-label mx-auto">{hp.identitySection}</motion.span>
-            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">Vision, Mission &amp; Valeurs</motion.h2>
+            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">{hp.identityTitle}</motion.h2>
           </motion.div>
           <div className="grid lg:grid-cols-3 gap-8">
             {[
@@ -494,11 +495,11 @@ export function HomePage({
         <div className="mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-              <motion.span variants={fadeUp} className="section-label">Ministères</motion.span>
+              <motion.span variants={fadeUp} className="section-label">{hp.ministriesSection}</motion.span>
               <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">{dict.ministries.title}</motion.h2>
             </div>
             <motion.a variants={fadeUp} href={`/${locale}/ministries`} className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:gap-3 transition-all">
-              Voir tous les ministères <ArrowRight className="h-4 w-4" />
+              {hp.viewAllMinistries} <ArrowRight className="h-4 w-4" />
             </motion.a>
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" style={{ perspective: "1000px" }}>
@@ -541,11 +542,11 @@ export function HomePage({
               href={`/${locale}/media`} 
               className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-slate-200 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all"
             >
-              <BookOpen className="h-4 w-4" /> Tous les messages
+              <BookOpen className="h-4 w-4" /> {hp.allMessages}
             </motion.a>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative overflow-hidden rounded-[2.5rem] border border-slate-200 aspect-[4/3] shadow-2xl">
-            <Image src="/images/adoration2.jpg" alt="Adoration Canaan" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+            <Image src="/images/adoration2.jpg" alt={hp.worshipAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </motion.div>
         </div>
       </section>
@@ -587,7 +588,7 @@ export function HomePage({
       <section id="contact" className="bg-slate-50 py-24 px-6 lg:px-10">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className="section-label">Contact</motion.span>
+            <motion.span variants={fadeUp} className="section-label">{hp.contactLabel}</motion.span>
             <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">{hp.joinTitle}</motion.h2>
             <motion.p variants={fadeUp} className="mt-4 text-lg text-slate-600">{dict.contact.subtitle}</motion.p>
             <div className="mt-8 space-y-4">
@@ -605,10 +606,10 @@ export function HomePage({
             </Link>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative overflow-hidden rounded-3xl">
-            <Image src="/images/ministere.jpg" alt="Église Canaan" width={600} height={400} className="object-cover w-full h-full" />
+            <Image src="/images/ministere.jpg" alt={hp.churchAlt} width={600} height={400} className="object-cover w-full h-full" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
-              <p className="font-[var(--font-heading)] text-xl font-bold">CIRC Cannaan — Agblangandan</p>
+              <p className="font-[var(--font-heading)] text-xl font-bold">{hp.locationTitle}</p>
               <p className="text-sm text-slate-300 mt-1">{hp.welcomeFamily}</p>
             </div>
           </motion.div>
@@ -649,7 +650,7 @@ export function HomePage({
                   setIsPlaying(false);
                 }}
                 className="absolute right-6 top-6 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 hover:text-white transition-colors"
-                aria-label="Fermer"
+                aria-label={hp.closeModal}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -672,7 +673,7 @@ export function HomePage({
                   <div className="flex-1 overflow-y-auto max-h-[220px] pr-2 custom-scrollbar">
                     <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">{hp.sermonModalSummary}</h4>
                     <p className="whitespace-pre-line text-sm leading-relaxed text-slate-300">
-                      {selectedSermon.summary || selectedSermon.content || "Le résumé détaillé de ce message sera disponible prochainement."}
+                      {selectedSermon.summary || selectedSermon.content || hp.sermonSummaryFallback}
                     </p>
                   </div>
                 </div>
