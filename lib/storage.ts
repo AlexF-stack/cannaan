@@ -16,13 +16,17 @@ function localPath(key: string): string {
 async function readBlobText(pathname: string): Promise<string | null> {
   const token = blobToken();
   if (!token) return null;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 3000);
   try {
-    const meta = await head(pathname, { token });
-    const res = await fetch(meta.url);
+    const meta = await head(pathname, { token, abortSignal: controller.signal });
+    const res = await fetch(meta.url, { signal: controller.signal });
     if (!res.ok) return null;
     return res.text();
   } catch {
     return null;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
