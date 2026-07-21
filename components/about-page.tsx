@@ -2,21 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { CalendarDays, Globe, HandHeart, HeartHandshake, MapPin, Users, ArrowRight } from "lucide-react";
 
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getPageCopy } from "@/lib/i18n-pages";
-
-const stagger: Variants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.13 } } };
-const fadeUp: Variants = { hidden: { opacity: 0, y: 32 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } } };
-const fadeLeft: Variants = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
+import { useMotionVariants } from "@/lib/motion";
 
 export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const p = getPageCopy(locale).aboutPage;
+  const { fadeUp, stagger } = useMotionVariants();
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -33,31 +32,11 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
 
       <section className="bg-white px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-20 max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-6">
-              <span className="block h-0.5 w-8 bg-amber-400" /> {p.whoTitle}{" "}
-              <span className="block h-0.5 w-8 bg-amber-400" />
-            </div>
-            <h2 className="font-[var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-relaxed">
-              {p.whoHeading}
-            </h2>
-          </motion.div>
+          <SectionHeading label={p.whoTitle} title={p.whoHeading} align="center" className="mb-20 max-w-4xl mx-auto" />
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeLeft}
-              className="relative"
-            >
-              <div className="absolute -top-5 -left-5 h-full w-full rounded-3xl border-2 border-amber-400/30 rounded-3xl" />
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="relative">
+            <div className="absolute -top-5 -left-5 h-full w-full rounded-3xl border-2 border-circ-gold/30 rounded-3xl" />
               <div className="relative overflow-hidden rounded-3xl aspect-[4/5] shadow-2xl">
                 <Image
                   src="/images/prophets.jpg"
@@ -67,7 +46,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
                   className="object-cover object-top"
                 />
               </div>
-              <div className="absolute -bottom-6 right-6 rounded-2xl bg-blue-600 px-6 py-4 text-white shadow-xl">
+              <div className="absolute -bottom-6 right-6 rounded-2xl bg-circ-blue px-6 py-4 text-white shadow-xl">
                 <div className="font-[var(--font-heading)] text-3xl font-extrabold">20+</div>
                 <div className="text-xs text-blue-200 mt-0.5">{p.yearsLabel}</div>
               </div>
@@ -93,7 +72,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               <motion.div variants={fadeUp} className="mt-8">
                 <Link
                   href={`/${locale}/prophete`}
-                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3 text-sm font-bold text-white hover:bg-blue-700 transition-all hover:scale-105 shadow-md"
+                  className="inline-flex items-center gap-2 rounded-full bg-circ-blue px-7 py-3 text-sm font-bold text-white hover:bg-circ-blue-light transition-colors shadow-md"
                 >
                   {p.learnMoreProphet} <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -123,7 +102,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-3xl bg-blue-600 p-8 text-white"
+              className="rounded-3xl bg-circ-blue p-8 text-white"
             >
               <Globe className="h-10 w-10 text-blue-200 mb-5" />
               <h3 className="font-[var(--font-heading)] text-2xl font-bold mb-4">{dict.identity.visionTitle}</h3>
@@ -135,7 +114,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="rounded-3xl bg-amber-400 p-8"
+              className="rounded-3xl bg-circ-gold p-8"
             >
               <MapPin className="h-10 w-10 text-amber-900 mb-5" />
               <h3 className="font-[var(--font-heading)] text-2xl font-bold mb-4 text-amber-900">{dict.identity.missionTitle}</h3>
@@ -147,7 +126,7 @@ export function AboutPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-3xl bg-slate-900 p-8 text-white"
+              className="rounded-3xl bg-circ-navy p-8 text-white"
             >
               <HandHeart className="h-10 w-10 text-amber-400 mb-5" />
               <h3 className="font-[var(--font-heading)] text-2xl font-bold mb-4">{dict.identity.valuesTitle}</h3>

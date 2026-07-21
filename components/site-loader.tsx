@@ -113,7 +113,7 @@ export function SiteLoader() {
                 cx="80"
                 cy="80"
                 r={radius}
-                className="stroke-amber-400"
+                  className="stroke-circ-gold"
                 strokeWidth="3"
                 fill="transparent"
                 strokeDasharray={circumference}
@@ -167,7 +167,7 @@ export function SiteLoader() {
             transition={{ delay: 0.5 }}
             className="mt-6 flex items-center gap-2"
           >
-            <span className="text-[10px] font-mono tracking-widest text-amber-400/80 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20 shadow-[0_0_10px_rgba(245,158,11,0.05)]">
+            <span className="text-[10px] font-mono tracking-widest text-circ-gold-light/90 bg-circ-gold/10 px-2.5 py-0.5 rounded-full border border-circ-gold/20 shadow-[0_0_10px_rgba(232,163,23,0.05)]">
               {progress}%
             </span>
           </motion.div>

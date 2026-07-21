@@ -1,19 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { PlayCircle, MapPin, Clock } from "lucide-react";
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getPageCopy } from "@/lib/i18n-pages";
-
-const fadeUp: Variants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } };
-const stagger: Variants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+import { useMotionVariants } from "@/lib/motion";
 
 export function EventsPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const p = getPageCopy(locale).eventsPage;
+  const { fadeUp, stagger } = useMotionVariants();
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <div className="fixed inset-x-0 top-0 z-50">
@@ -31,7 +31,7 @@ export function EventsPage({ locale, dict }: { locale: Locale; dict: Dictionary 
       <section className="bg-slate-50 py-24 px-6 lg:px-10 border-b border-slate-100">
         <div className="mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-12 text-center">
-            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-500 mb-4">
+            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-circ-red mb-4">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
@@ -57,7 +57,7 @@ export function EventsPage({ locale, dict }: { locale: Locale; dict: Dictionary 
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
             
             <div className="relative z-10 flex flex-col items-center">
-              <div className="h-20 w-20 rounded-full bg-red-600/90 flex items-center justify-center text-white mb-6 shadow-[0_0_40px_rgba(220,38,38,0.5)] group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+              <div className="h-20 w-20 rounded-full bg-circ-red/90 flex items-center justify-center text-white mb-6 shadow-[0_0_40px_rgba(196,30,58,0.45)] group-hover:bg-circ-red-light transition-colors duration-300">
                 <PlayCircle className="h-10 w-10 ml-1" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-2 text-center px-4">{p.liveCta}</h3>
@@ -69,14 +69,7 @@ export function EventsPage({ locale, dict }: { locale: Locale; dict: Dictionary 
 
       <section className="bg-white py-24 px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-16">
-            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">
-              <span className="block h-0.5 w-8 bg-amber-400" /> {p.agendaLabel}
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-3xl font-extrabold text-slate-900 sm:text-4xl">
-              {p.upcomingTitle}
-            </motion.h2>
-          </motion.div>
+          <SectionHeading label={p.agendaLabel} title={p.upcomingTitle} className="mb-16" />
 
           <div className="grid md:grid-cols-2 gap-10">
             <motion.div 

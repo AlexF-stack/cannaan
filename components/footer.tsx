@@ -35,7 +35,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                   {brand.line1}
                 </span>
-                <span className="font-[var(--font-heading)] text-xl font-extrabold tracking-tight text-blue-400">
+                <span className="font-heading text-xl font-extrabold tracking-tight text-circ-blue-light">
                   {brand.line2}
                 </span>
               </div>
@@ -56,8 +56,8 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
           {/* Liens rapides */}
           <div>
-            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-amber-400">
-              <span className="h-0.5 w-6 rounded-full bg-amber-400" />
+            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-circ-gold">
+              <span className="h-0.5 w-6 rounded-full bg-circ-gold" />
               {dict.footer.quickLinks}
             </h2>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
@@ -67,7 +67,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                     href={link.href}
                     className="group flex items-center gap-1.5 text-slate-400 transition-colors duration-200 hover:text-white"
                   >
-                    <span className="h-1 w-1 shrink-0 rounded-full bg-blue-500/40 transition-colors group-hover:bg-amber-400" />
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-circ-blue-light/40 transition-colors group-hover:bg-circ-gold" />
                     {link.label}
                   </Link>
                 </li>
@@ -77,8 +77,8 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
           {/* Contact */}
           <div>
-            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-amber-400">
-              <span className="h-0.5 w-6 rounded-full bg-amber-400" />
+            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-circ-gold">
+              <span className="h-0.5 w-6 rounded-full bg-circ-gold" />
               {dict.footer.contact}
             </h2>
             <ul className="space-y-4 text-sm">
@@ -115,8 +115,8 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
           {/* Localisation */}
           <div>
-            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-amber-400">
-              <span className="h-0.5 w-6 rounded-full bg-amber-400" />
+            <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-circ-gold">
+              <span className="h-0.5 w-6 rounded-full bg-circ-gold" />
               {dict.footer.findUs}
             </h2>
             <div className="space-y-4 text-sm">
