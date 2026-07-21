@@ -605,8 +605,8 @@ export function HomePage({
             <Image src="/images/ministere.jpg" alt="Église Canaan" width={600} height={400} className="object-cover w-full h-full" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
-              <p className="font-[var(--font-heading)] text-xl font-bold">Canaan — Cotonou</p>
-              <p className="text-sm text-slate-300 mt-1">Bienvenue dans notre famille</p>
+              <p className="font-[var(--font-heading)] text-xl font-bold">CIRC Cannaan — Agblangandan</p>
+              <p className="text-sm text-slate-300 mt-1">{dict.footer.churchTagline}</p>
             </div>
           </motion.div>
         </div>

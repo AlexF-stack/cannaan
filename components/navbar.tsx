@@ -6,21 +6,15 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, HandHeart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CHURCH_BRAND, CHURCH_NAME } from "@/lib/brand";
 import type { Dictionary, Locale } from "@/lib/i18n";
-
-const CHURCH_NAME = "Centre International de Réveil Cannaan";
+import { getMainNavLinks } from "@/lib/navigation";
 
 export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const links = [
-    { href: `/${locale}#about`,       label: dict.nav.about },
-    { href: `/${locale}/ministries`,  label: dict.nav.ministries },
-    { href: `/${locale}/evenements`,  label: "Événements & Direct" },
-    { href: `/${locale}/media`,       label: "Médiathèque" },
-    { href: `/${locale}/contact`,     label: dict.nav.contact },
-  ];
+  const links = getMainNavLinks(locale, dict);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -59,10 +53,10 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </div>
               <div className="hidden lg:flex flex-col leading-tight">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                  Centre International de Réveil
+                  {CHURCH_BRAND.line1}
                 </span>
                 <span className="text-xl font-extrabold text-blue-600 font-[var(--font-heading)] leading-tight tracking-tight">
-                  Cannaan
+                  {CHURCH_BRAND.line2}
                 </span>
               </div>
             </Link>

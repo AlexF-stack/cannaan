@@ -16,6 +16,8 @@ export type Dictionary = {
     resources: string;
     contact: string;
     donate: string;
+    media: string;
+    events: string;
   };
   hero: {
     badge: string;
@@ -63,6 +65,13 @@ export type Dictionary = {
     findUs: string;
     churchTagline: string;
     mapText: string;
+    contact: string;
+    phone: string;
+    email: string;
+    address: string;
+    mainService: string;
+    copyright: string;
+    motto: string;
   };
   contact: {
     title: string;
@@ -95,6 +104,8 @@ export const dictionary: Record<Locale, Dictionary> = {
       resources: "Ressources",
       contact: "Contact",
       donate: "Faire un Don",
+      media: "Médiathèque",
+      events: "Événements & Direct",
     },
     hero: {
       badge: "Église Canaan - Culte en direct",
@@ -154,8 +165,15 @@ export const dictionary: Record<Locale, Dictionary> = {
     footer: {
       quickLinks: "Liens Rapides",
       findUs: "Nous trouver",
-      churchTagline: "Église locale - Foi, Famille, Impact.",
+      churchTagline: "Église locale — Foi, Famille, Impact.",
       mapText: "Auditorium CIRC, derrière la Maternité Agblangandan, Bénin",
+      contact: "Contact",
+      phone: "Téléphone",
+      email: "Email",
+      address: "Adresse",
+      mainService: "Culte principal",
+      copyright: "CIRC Cannaan. Tous droits réservés.",
+      motto: "Bâtir pour régner dans les nations",
     },
     contact: {
       title: "Nous Contacter",
@@ -187,6 +205,8 @@ export const dictionary: Record<Locale, Dictionary> = {
       resources: "Resources",
       contact: "Contact",
       donate: "Give",
+      media: "Media Library",
+      events: "Events & Live",
     },
     hero: {
       badge: "Canaan Church - Live worship",
@@ -246,8 +266,15 @@ export const dictionary: Record<Locale, Dictionary> = {
     footer: {
       quickLinks: "Quick Links",
       findUs: "Find us",
-      churchTagline: "Local church - Faith, Family, Impact.",
+      churchTagline: "Local church — Faith, Family, Impact.",
       mapText: "CIRC Auditorium, behind the Agblangandan Maternity, Benin",
+      contact: "Contact",
+      phone: "Phone",
+      email: "Email",
+      address: "Address",
+      mainService: "Main service",
+      copyright: "CIRC Cannaan. All rights reserved.",
+      motto: "Building to reign in the nations",
     },
     contact: {
       title: "Contact Us",
