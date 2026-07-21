@@ -1,8 +1,14 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import { AdminLoginForm } from "@/components/admin-login-form";
 import { PageHeader } from "@/components/page-header";
+import { buildNoIndexMetadata } from "@/lib/metadata";
 import { isLocale } from "@/lib/i18n";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildNoIndexMetadata("Connexion admin");
+}
 
 export default async function AdminLoginPage({
   params,

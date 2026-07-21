@@ -54,7 +54,10 @@ export function WhatsAppButton() {
       </AnimatePresence>
 
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Fermer le menu WhatsApp" : "Ouvrir le menu WhatsApp"}
+        aria-expanded={isOpen}
         className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/40 transition-all hover:scale-110 hover:shadow-xl hover:shadow-[#25D366]/50"
       >
         {isOpen ? (

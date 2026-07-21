@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Globe, PlayCircle, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, PlayCircle, Heart } from "lucide-react";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -29,13 +29,13 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           {/* Logo & Tagline */}
           <div className="flex flex-col gap-6">
             <Link href={`/${locale}`} className="flex items-center gap-3 w-fit group">
-              <div className="relative h-12 w-auto bg-slate-900/50 rounded-lg p-1.5 border border-white/5 shadow-md">
+              <div className="relative h-12 w-auto">
                 <Image
                   src="/images/canaan_logo_1779631751389.png"
                   alt="CIRC Cannaan"
                   width={120}
                   height={42}
-                  className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                  className="h-12 w-auto object-contain transition-transform group-hover:scale-105"
                   priority
                 />
               </div>
@@ -62,15 +62,6 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 aria-label="YouTube"
               >
                 <PlayCircle className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-9 w-9 rounded-full bg-slate-800/80 border border-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:bg-blue-500/10 hover:border-blue-500/20 transition-all duration-300 hover:scale-110"
-                aria-label="Facebook"
-              >
-                <Globe className="h-4 w-4" />
               </a>
             </div>
           </div>

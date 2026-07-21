@@ -19,7 +19,6 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
     { href: `/${locale}/ministries`,  label: dict.nav.ministries },
     { href: `/${locale}/evenements`,  label: "Événements & Direct" },
     { href: `/${locale}/media`,       label: "Médiathèque" },
-    { href: `/${locale}/don`,         label: dict.nav.resources },
     { href: `/${locale}/contact`,     label: dict.nav.contact },
   ];
 
@@ -106,6 +105,8 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               onClick={() => setOpen((v) => !v)}
               className="md:hidden rounded-lg border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-50"
               aria-label="Menu"
+              aria-expanded={open}
+              aria-controls="mobile-nav-menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -118,6 +119,7 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         {open && (
           <motion.div
             key="mobile-menu"
+            id="mobile-nav-menu"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}

@@ -150,7 +150,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
         title="Mediatheque & Podcasts"
         subtitle="Revivez nos moments forts en images et ecoutez les predications pour nourrir votre foi au quotidien."
         image="/images/adoration1.jpg"
-        badge="Ressources"
+        badge="Médiathèque"
       />
 
       <section className="border-b border-slate-100 bg-white px-6 py-24 lg:px-10">

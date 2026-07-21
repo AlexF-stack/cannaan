@@ -31,8 +31,8 @@ export default function AdminImageReview() {
       setStatus(`Image uploaded: ${data.url}`);
       setFile(null);
       setCaption("");
-    } catch (err: any) {
-      setStatus(err.message);
+    } catch (err: unknown) {
+      setStatus(err instanceof Error ? err.message : "Upload failed");
     }
   };
 

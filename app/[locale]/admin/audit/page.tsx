@@ -1,12 +1,18 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/page-header";
 import { getAdminCookieName, isValidSessionCookie } from "@/lib/admin-auth";
 import { readAuditEntries } from "@/lib/cms";
+import { buildNoIndexMetadata } from "@/lib/metadata";
 import { isLocale } from "@/lib/i18n";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildNoIndexMetadata("Audit admin");
+}
 
 export default async function AdminAuditPage({
   params,

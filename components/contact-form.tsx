@@ -54,16 +54,16 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         aria-hidden="true"
       />
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.name}</label>
-        <input name="name" required placeholder={dict.contact.name} className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
+        <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.name}</label>
+        <input id="contact-name" name="name" required placeholder={dict.contact.name} className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.email}</label>
-        <input name="email" type="email" required placeholder={dict.contact.email} className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
+        <label htmlFor="contact-email" className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.email}</label>
+        <input id="contact-email" name="email" type="email" required placeholder={dict.contact.email} className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.message}</label>
-        <textarea name="message" required rows={5} placeholder={dict.contact.message} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
+        <label htmlFor="contact-message" className="block text-sm font-medium text-slate-700 mb-1">{dict.contact.message}</label>
+        <textarea id="contact-message" name="message" required rows={5} placeholder={dict.contact.message} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-slate-400" />
       </div>
       <Button type="submit" disabled={loading} size="lg" className="w-full rounded-xl bg-primary text-white hover:bg-primary/90">{loading ? "..." : dict.contact.submit}</Button>
       {status === "ok" && <p className="text-sm font-medium text-emerald-600 text-center">{dict.contact.success}</p>}

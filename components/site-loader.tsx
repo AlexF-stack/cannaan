@@ -5,10 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export function SiteLoader() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return sessionStorage.getItem("canaan_intro_seen") !== "1";
+  });
   const [progress, setProgress] = useState(0);
 
   const completeLoading = useCallback(() => {
+    sessionStorage.setItem("canaan_intro_seen", "1");
     setLoading(false);
   }, []);
 
@@ -32,12 +36,11 @@ export function SiteLoader() {
         return;
       }
       setProgress(currentProgress);
-    }, 45);
+    }, 35);
 
-    // Sécurité : timeout maximum de 6 secondes
     const safetyTimeout = setTimeout(() => {
       completeLoading();
-    }, 6000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
@@ -140,12 +143,15 @@ export function SiteLoader() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-center mt-8"
             >
-              <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
+              <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
                 Centre International de Réveil
-              </h2>
-              <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-200 to-white font-[var(--font-heading)] mt-1.5 tracking-wider">
+              </p>
+              <p
+                aria-hidden="true"
+                className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-200 to-white font-[var(--font-heading)] mt-1.5 tracking-wider"
+              >
                 CANNAAN
-              </h1>
+              </p>
             </motion.div>
 
             {/* Pourcentage de progression de chargement */}

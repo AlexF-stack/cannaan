@@ -1,23 +1,27 @@
-import { notFound } from "next/navigation";
-import { isLocale, locales } from "@/lib/i18n";
-import { Providers } from "@/components/providers";
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
-export default async function LocaleLayout({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}>) {
-  const { locale } = await params;
-  if (!isLocale(locale)) notFound();
-  return (
-    <Providers>
-      {children}
-    </Providers>
-  );
-}
+import { notFound } from "next/navigation";
+import { isLocale, locales } from "@/lib/i18n";
+import { LocaleLang } from "@/components/locale-lang";
+import { Providers } from "@/components/providers";
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}>) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+
+  return (
+    <Providers>
+      <LocaleLang locale={locale} />
+      {children}
+    </Providers>
+  );
+}
+

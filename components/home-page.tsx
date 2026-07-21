@@ -81,6 +81,15 @@ function TiltCard({ item, copy }: { item: (typeof ministries)[number]; copy: { t
 // ── Set IS_LIVE to true when a YouTube Live is in progress ──
 const IS_LIVE = false;
 
+type SermonPreview = {
+  title: string;
+  date: string;
+  speaker: string;
+  url?: string;
+  summary?: string;
+  content?: string;
+};
+
 export function HomePage({
   locale,
   dict,
@@ -88,10 +97,10 @@ export function HomePage({
 }: {
   locale: Locale;
   dict: Dictionary;
-  sermonsList: Array<{ title: string; date: string; speaker: string; url?: string; summary?: string }>;
+  sermonsList: SermonPreview[];
 }) {
-  const [realSermons, setRealSermons] = useState<any[]>(sermonsList);
-  const [selectedSermon, setSelectedSermon] = useState<any | null>(null);
+  const [realSermons, setRealSermons] = useState<SermonPreview[]>(sermonsList);
+  const [selectedSermon, setSelectedSermon] = useState<SermonPreview | null>(null);
   
   // Custom audio player state
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -111,7 +120,7 @@ export function HomePage({
       .catch((err) => console.error("Error fetching real sermons:", err));
   }, []);
 
-  const handleSermonClick = (sermon: any) => {
+  const handleSermonClick = (sermon: SermonPreview) => {
     setSelectedSermon(sermon);
     setIsPlaying(false);
     setCurrentTime(0);
@@ -166,7 +175,7 @@ export function HomePage({
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <main id="main-content" className="min-h-screen bg-white text-slate-900">
       <NavBar locale={locale} dict={dict} />
 
       {/* ══════════════════════════════════════════
@@ -500,10 +509,10 @@ export function HomePage({
       </section>
 
       {/* ── SERMONS ── */}
-      <section id="resources" className="relative overflow-hidden bg-slate-50 py-24 px-6 lg:px-10">
+      <section id="messages" className="relative overflow-hidden bg-slate-50 py-24 px-6 lg:px-10">
         <div className="relative z-10 mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className="section-label">Ressources</motion.span>
+            <motion.span variants={fadeUp} className="section-label">Médiathèque</motion.span>
             <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900 mb-8">Derniers Messages</motion.h2>
             <div className="space-y-4">
               {realSermons.slice(0, 2).map((s, i) => (
@@ -529,7 +538,7 @@ export function HomePage({
               href={`/${locale}/media`} 
               className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-slate-200 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-100 transition-all"
             >
-              <BookOpen className="h-4 w-4" /> Toutes les ressources
+              <BookOpen className="h-4 w-4" /> Tous les messages
             </motion.a>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative overflow-hidden rounded-[2.5rem] border border-slate-200 aspect-[4/3] shadow-2xl">
@@ -746,6 +755,6 @@ export function HomePage({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 }

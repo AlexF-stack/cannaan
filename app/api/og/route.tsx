@@ -1,9 +1,12 @@
 import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
+const MAX_TITLE_LENGTH = 100;
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const title = searchParams.get("title") ?? "CANAAN";
+  const rawTitle = searchParams.get("title") ?? "CANAAN";
+  const title = rawTitle.slice(0, MAX_TITLE_LENGTH);
 
   try {
     return new ImageResponse(
@@ -38,8 +41,8 @@ export async function GET(request: Request) {
             style={{
               fontSize: 36,
               textAlign: "center",
-            maxWidth: "80%",
-            color: "#93c5fd",
+              maxWidth: "80%",
+              color: "#93c5fd",
             }}
           >
             Une communauté vibrante pour expérimenter la présence de Dieu.
@@ -49,12 +52,10 @@ export async function GET(request: Request) {
       {
         width: 1200,
         height: 630,
-      }
+      },
     );
   } catch (e) {
-    console.log(`${e}`);
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    });
+    console.error(e);
+    return new Response("Failed to generate the image", { status: 500 });
   }
 }

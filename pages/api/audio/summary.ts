@@ -1,6 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-import path from 'path';
+import type { NextApiRequest, NextApiResponse } from "next";
+import fs from "fs";
+import path from "path";
+
+import { requireAdminApi } from "@/lib/api-auth";
 
 export const config = {
   api: {
@@ -8,48 +10,74 @@ export const config = {
   },
 };
 
+type AudioSummaryEntry = {
+  audioId: string;
+  content?: string;
+  summary?: string;
+  title?: string;
+  speaker?: string;
+  date?: string;
+  createdAt?: string;
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { audioId, content, summary, title, speaker, date } = req.body as { 
-    audioId: string; 
-    content?: string; 
+  if (!requireAdminApi(req)) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const { audioId, content, summary, title, speaker, date } = req.body as {
+    audioId?: string;
+    content?: string;
     summary?: string;
     title?: string;
     speaker?: string;
     date?: string;
   };
 
-  const actualContent = content || summary;
+  const actualContent = content ?? summary;
 
-  if (!audioId || typeof actualContent !== 'string') {
-    return res.status(400).json({ error: 'Missing audioId or summary content' });
+  if (!audioId || typeof actualContent !== "string" || actualContent.length > 20_000) {
+    return res.status(400).json({ error: "Missing audioId or invalid summary content" });
   }
 
-  const manifestPath = path.join(process.cwd(), 'data', 'audio_summaries.json');
-  let manifest: any[] = [];
-  try {
-    const raw = await fs.promises.readFile(manifestPath, 'utf-8');
-    manifest = JSON.parse(raw);
-  } catch (_) {}
+  if (!/^[a-zA-Z0-9._-]+$/.test(audioId)) {
+    return res.status(400).json({ error: "Invalid audioId" });
+  }
 
-  // Upsert summary and metadata
+  const manifestPath = path.join(process.cwd(), "data", "audio_summaries.json");
+  let manifest: AudioSummaryEntry[] = [];
+
+  try {
+    const raw = await fs.promises.readFile(manifestPath, "utf-8");
+    manifest = JSON.parse(raw) as AudioSummaryEntry[];
+  } catch {
+    manifest = [];
+  }
+
   const existing = manifest.find((item) => item.audioId === audioId);
   if (existing) {
     existing.content = actualContent;
-    if (title) existing.title = title;
-    if (speaker) existing.speaker = speaker;
-    if (date) existing.date = date;
+    if (title) existing.title = title.slice(0, 200);
+    if (speaker) existing.speaker = speaker.slice(0, 120);
+    if (date) existing.date = date.slice(0, 80);
   } else {
-    manifest.push({ 
-      audioId, 
-      content: actualContent, 
-      title: title || 'Message Audio',
-      speaker: speaker || 'Prophète Ithiel Dossou',
-      date: date || new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
-      createdAt: new Date().toISOString() 
+    manifest.push({
+      audioId,
+      content: actualContent,
+      title: (title ?? "Message Audio").slice(0, 200),
+      speaker: (speaker ?? "Prophète Ithiel Dossou").slice(0, 120),
+      date:
+        date ??
+        new Date().toLocaleDateString("fr-FR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
+      createdAt: new Date().toISOString(),
     });
   }
 

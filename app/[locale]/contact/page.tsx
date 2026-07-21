@@ -1,11 +1,23 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { ContactForm } from "@/components/contact-form";
+import { buildPageMetadata } from "@/lib/metadata";
 import { dictionary, isLocale } from "@/lib/i18n";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return buildPageMetadata({ locale, path: "/contact" });
+}
 
 export default async function ContactPage({
   params,

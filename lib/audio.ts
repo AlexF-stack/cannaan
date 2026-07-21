@@ -8,6 +8,17 @@ export type AudioTeaching = {
   src: string;
 };
 
+const AUDIO_BASE = process.env.NEXT_PUBLIC_AUDIO_BASE_URL?.replace(/\/$/, "") ?? "";
+
+/** Préfixe CDN optionnel + normalisation des extensions audio. */
+export function resolveAudioSrc(relativePath: string) {
+  if (relativePath.startsWith("http://") || relativePath.startsWith("https://")) {
+    return relativePath;
+  }
+  const normalized = relativePath.replace(/\.mp3\.mpeg$/i, ".mp3");
+  return AUDIO_BASE ? `${AUDIO_BASE}${normalized}` : normalized;
+}
+
 export const audioTeachings: AudioTeaching[] = [
   {
     id: "canaan-50-jours-ithiel-08-mai-2026",
@@ -16,7 +27,7 @@ export const audioTeachings: AudioTeaching[] = [
     date: "08 Mai 2026",
     duration: "Audio",
     category: "Predication",
-    src: "/audio/CANAAN 50 Jours Prédication Ithiel 08 Mai 2026.mp3.mpeg",
+    src: resolveAudioSrc("/audio/CANAAN 50 Jours Prédication Ithiel 08 Mai 2026.mp3"),
   },
   {
     id: "canaan-prophete-ithiel-03-mai-2026",
@@ -25,7 +36,7 @@ export const audioTeachings: AudioTeaching[] = [
     date: "03 Mai 2026",
     duration: "Audio",
     category: "Predication",
-    src: "/audio/CANAAN Prédication Prophète Ithiel 03 Mai 2026.mp3.mpeg",
+    src: resolveAudioSrc("/audio/CANAAN Prédication Prophète Ithiel 03 Mai 2026.mp3"),
   },
   {
     id: "canaan-k-klistime-19-avril-2026",
@@ -34,7 +45,7 @@ export const audioTeachings: AudioTeaching[] = [
     date: "19 Avril 2026",
     duration: "Audio",
     category: "Predication",
-    src: "/audio/CANAAN Prédication K.Klistimé 19 Avril 2026.mp3.mpeg",
+    src: resolveAudioSrc("/audio/CANAAN Prédication K.Klistimé 19 Avril 2026.mp3"),
   },
   {
     id: "canaan-50-jours-k-klistime-14-avril-2026",
@@ -43,7 +54,7 @@ export const audioTeachings: AudioTeaching[] = [
     date: "14 Avril 2026",
     duration: "Audio",
     category: "Predication",
-    src: "/audio/CANAAN 50 Jours Prédication K.Klistimé 14 Avril 2026.mp3.mpeg",
+    src: resolveAudioSrc("/audio/CANAAN 50 Jours Prédication K.Klistimé 14 Avril 2026.mp3"),
   },
   {
     id: "canaan-50-jours-k-klistime-13-avril-2026",
@@ -52,6 +63,6 @@ export const audioTeachings: AudioTeaching[] = [
     date: "13 Avril 2026",
     duration: "Audio",
     category: "Predication",
-    src: "/audio/CANAAN 50 Jours Prédication K.Klistimé 13 Avril 2026.mp3.mpeg",
+    src: resolveAudioSrc("/audio/CANAAN 50 Jours Prédication K.Klistimé 13 Avril 2026.mp3"),
   },
 ];
