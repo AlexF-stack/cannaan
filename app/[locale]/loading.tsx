@@ -1,7 +1,13 @@
+"use client";
+
 import Image from "next/image";
+
+import { useLocaleContext } from "@/lib/use-locale";
 
 /** Chargement animé lors des transitions entre pages. */
 export default function Loading() {
+  const { pages } = useLocaleContext();
+
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/70 backdrop-blur-md transition-all duration-300">
       <div className="absolute h-[200px] w-[200px] rounded-full bg-blue-600/10 blur-[80px] pointer-events-none" />
@@ -13,7 +19,7 @@ export default function Loading() {
         <div className="absolute flex h-14 w-14 animate-pulse items-center justify-center">
           <Image
             src="/images/canaan_logo_1779631751389.png"
-            alt="CIRC Canaan"
+            alt="CIRC Cannaan"
             width={56}
             height={56}
             className="h-full w-full object-contain drop-shadow-[0_3px_6px_rgba(0,0,0,0.4)]"
@@ -23,7 +29,7 @@ export default function Loading() {
       </div>
 
       <span className="mt-6 animate-pulse rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-amber-400/80">
-        Chargement
+        {pages.common.loading}
       </span>
     </div>
   );

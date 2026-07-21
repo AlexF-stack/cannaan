@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 import { SiteLoader } from "@/components/site-loader";
+import { SkipLink } from "@/components/skip-link";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 
 const siteUrl = getSiteUrl();
@@ -86,12 +87,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-[var(--font-body)] antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900 focus:shadow-lg"
-        >
-          Aller au contenu
-        </a>
+        <SkipLink />
         <SiteLoader />
         <script
           type="application/ld+json"

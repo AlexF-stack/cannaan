@@ -14,6 +14,7 @@ import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ministries, ministryCopy } from "@/lib/content";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { getPageCopy } from "@/lib/i18n-pages";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -99,6 +100,8 @@ export function HomePage({
   dict: Dictionary;
   sermonsList: SermonPreview[];
 }) {
+  const hp = getPageCopy(locale).homePage;
+  const common = getPageCopy(locale).common;
   const [realSermons, setRealSermons] = useState<SermonPreview[]>(sermonsList);
   const [selectedSermon, setSelectedSermon] = useState<SermonPreview | null>(null);
   
@@ -312,9 +315,9 @@ export function HomePage({
               className="hidden lg:flex flex-col gap-4"
             >
               {[
-                { n: "20+", label: "Ans de ministère", color: "border-amber-400/30 bg-amber-400/10" },
-                { n: "500+", label: "Membres actifs",   color: "border-blue-400/30 bg-blue-400/10" },
-                { n: "5",   label: "Villes impactées",  color: "border-white/20 bg-white/5" },
+                { n: "20+", label: hp.statsYears, color: "border-amber-400/30 bg-amber-400/10" },
+                { n: "500+", label: hp.statsMembers, color: "border-blue-400/30 bg-blue-400/10" },
+                { n: "5", label: hp.statsCities, color: "border-white/20 bg-white/5" },
               ].map(({ n, label, color }) => (
                 <div key={label} className={`rounded-2xl border ${color} px-7 py-5 backdrop-blur-md text-center min-w-[140px]`}>
                   <div className="font-[var(--font-heading)] text-3xl font-extrabold text-white">{n}</div>
@@ -347,7 +350,7 @@ export function HomePage({
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.6 }}
         >
-          <span className="text-[10px] uppercase tracking-widest text-white/70">Découvrir</span>
+          <span className="text-[10px] uppercase tracking-widest text-white/70">{hp.discover}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
@@ -457,7 +460,7 @@ export function HomePage({
         <div className="absolute inset-0 bg-[url('/images/adoration1.jpg')] bg-cover bg-center opacity-5" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
-            <motion.span variants={fadeUp} className="section-label mx-auto">Notre Identité</motion.span>
+            <motion.span variants={fadeUp} className="section-label mx-auto">{hp.identitySection}</motion.span>
             <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">Vision, Mission &amp; Valeurs</motion.h2>
           </motion.div>
           <div className="grid lg:grid-cols-3 gap-8">
@@ -512,8 +515,8 @@ export function HomePage({
       <section id="messages" className="relative overflow-hidden bg-slate-50 py-24 px-6 lg:px-10">
         <div className="relative z-10 mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className="section-label">Médiathèque</motion.span>
-            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900 mb-8">Derniers Messages</motion.h2>
+            <motion.span variants={fadeUp} className="section-label">{hp.mediaSection}</motion.span>
+            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900 mb-8">{hp.sermonsSection}</motion.h2>
             <div className="space-y-4">
               {realSermons.slice(0, 2).map((s, i) => (
                 <motion.div 
@@ -563,7 +566,7 @@ export function HomePage({
               {[
                 { icon: CreditCard, title: dict.giving.cardTitle, desc: dict.giving.cardDescription },
                 { icon: Landmark, title: dict.giving.mobileTitle, desc: dict.giving.mobileDescription },
-                { icon: ShieldCheck, title: "100% Sécurisé", desc: "Transactions cryptées et protégées" },
+                { icon: ShieldCheck, title: common.secure, desc: hp.secureDesc },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="flex items-center gap-4 rounded-2xl bg-white/10 backdrop-blur-sm p-5 border border-white/10">
                   <div className="h-10 w-10 shrink-0 rounded-full bg-white/20 flex items-center justify-center">
@@ -585,7 +588,7 @@ export function HomePage({
         <div className="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeUp} className="section-label">Contact</motion.span>
-            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">Rejoignez-nous</motion.h2>
+            <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900">{hp.joinTitle}</motion.h2>
             <motion.p variants={fadeUp} className="mt-4 text-lg text-slate-600">{dict.contact.subtitle}</motion.p>
             <div className="mt-8 space-y-4">
               <div className="flex items-center gap-4">
@@ -598,7 +601,7 @@ export function HomePage({
               </div>
             </div>
             <Link href={`/${locale}/contact`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-sm font-bold text-white hover:bg-blue-700 transition-all hover:scale-105 shadow-lg">
-              Nous Contacter <ArrowRight className="h-4 w-4" />
+              {hp.joinContact} <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative overflow-hidden rounded-3xl">
@@ -606,7 +609,7 @@ export function HomePage({
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
             <div className="absolute bottom-6 left-6 text-white">
               <p className="font-[var(--font-heading)] text-xl font-bold">CIRC Cannaan — Agblangandan</p>
-              <p className="text-sm text-slate-300 mt-1">{dict.footer.churchTagline}</p>
+              <p className="text-sm text-slate-300 mt-1">{hp.welcomeFamily}</p>
             </div>
           </motion.div>
         </div>
@@ -667,7 +670,7 @@ export function HomePage({
                   </div>
 
                   <div className="flex-1 overflow-y-auto max-h-[220px] pr-2 custom-scrollbar">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Résumé du message</h4>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">{hp.sermonModalSummary}</h4>
                     <p className="whitespace-pre-line text-sm leading-relaxed text-slate-300">
                       {selectedSermon.summary || selectedSermon.content || "Le résumé détaillé de ce message sera disponible prochainement."}
                     </p>
@@ -680,7 +683,7 @@ export function HomePage({
                     <div className="h-16 w-16 mb-4 flex items-center justify-center rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md shadow-inner animate-pulse">
                       <Headphones className="h-8 w-8 text-amber-400" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Lecteur Média</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">{hp.sermonModalPlayer}</span>
                   </div>
 
                   {selectedSermon.url ? (
@@ -724,7 +727,7 @@ export function HomePage({
                           href={selectedSermon.url}
                           download
                           className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all hover:scale-105 hover:bg-white/10 hover:text-white"
-                          title="Télécharger l'audio"
+                          title={common.downloadAudio}
                         >
                           <Download className="h-5 w-5" />
                         </a>

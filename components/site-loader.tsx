@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useLocaleContext } from "@/lib/use-locale";
 
 export function SiteLoader() {
+  const { pages } = useLocaleContext();
   const [loading, setLoading] = useState(() => {
     if (typeof window === "undefined") return true;
     return sessionStorage.getItem("canaan_intro_seen") !== "1";
@@ -144,7 +146,7 @@ export function SiteLoader() {
               className="text-center mt-8"
             >
               <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-slate-400">
-                Centre International de Réveil
+                {pages.loader.tagline}
               </p>
               <p
                 aria-hidden="true"
@@ -172,7 +174,7 @@ export function SiteLoader() {
             onClick={completeLoading}
             className="absolute bottom-10 right-10 text-white/40 text-xs hover:text-white transition-colors uppercase tracking-[0.2em] z-10 bg-white/5 hover:bg-white/10 px-4 py-1.5 rounded-full border border-white/5 backdrop-blur-sm"
           >
-            Passer
+            {pages.loader.skip}
           </button>
         </motion.div>
       )}

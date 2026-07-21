@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { ministries, ministryCopy } from "@/lib/content";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { getPageCopy } from "@/lib/i18n-pages";
 
 const stagger: Variants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.12 } } };
 const fadeUp: Variants = { hidden: { opacity: 0, y: 32 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
@@ -22,7 +23,7 @@ const COLOR_MAP = {
   social:  { bg: "from-emerald-500 to-teal-700", badge: "bg-emerald-400" },
 } as const;
 
-function TiltCard3D({ item, copy }: { item: (typeof ministries)[number]; copy: { title: string; description: string } }) {
+function TiltCard3D({ item, copy, learnMore }: { item: (typeof ministries)[number]; copy: { title: string; description: string }; learnMore: string }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 180, damping: 18 });
@@ -60,7 +61,7 @@ function TiltCard3D({ item, copy }: { item: (typeof ministries)[number]; copy: {
           {copy.description}
         </p>
         <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-white opacity-0 translate-y-2 transition-all duration-500 delay-75 group-hover:opacity-100 group-hover:translate-y-0">
-          En savoir plus <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {learnMore} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </div>
       </div>
     </motion.div>
@@ -68,6 +69,8 @@ function TiltCard3D({ item, copy }: { item: (typeof ministries)[number]; copy: {
 }
 
 export function MinistriesPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const p = getPageCopy(locale).ministriesPage;
+  const common = getPageCopy(locale).common;
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <div className="fixed inset-x-0 top-0 z-50">
@@ -78,21 +81,20 @@ export function MinistriesPage({ locale, dict }: { locale: Locale; dict: Diction
         title={dict.nav.ministries}
         subtitle={dict.ministries.title}
         image="/images/adoration2.jpg"
-        badge="Communauté"
+        badge={p.badge}
       />
 
-      {/* Grid */}
       <section className="bg-white px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-14 text-center">
             <motion.span variants={fadeUp} className="inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
-              <span className="h-0.5 w-8 bg-amber-400 block" /> Nos Ministères
+              <span className="h-0.5 w-8 bg-amber-400 block" /> {p.sectionLabel}
             </motion.span>
             <motion.h2 variants={fadeUp} className="font-[var(--font-heading)] text-4xl font-extrabold text-slate-900 sm:text-5xl">
-              Une place pour chacun
+              {p.sectionTitle}
             </motion.h2>
             <motion.p variants={fadeUp} className="mt-4 max-w-xl mx-auto text-slate-600 text-lg">
-              Quelle que soit votre saison de vie, il y a un ministère fait pour vous à Canaan.
+              {p.sectionSubtitle}
             </motion.p>
           </motion.div>
 
@@ -105,14 +107,13 @@ export function MinistriesPage({ locale, dict }: { locale: Locale; dict: Diction
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
               >
-                <TiltCard3D item={item} copy={ministryCopy[locale][item.key]} />
+                <TiltCard3D item={item} copy={ministryCopy[locale][item.key]} learnMore={common.learnMore} />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA banner */}
       <section className="bg-slate-50 px-6 py-20 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <motion.div
@@ -125,13 +126,13 @@ export function MinistriesPage({ locale, dict }: { locale: Locale; dict: Diction
             <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-amber-400/20 blur-2xl" />
             <div className="relative z-10">
               <h2 className="font-[var(--font-heading)] text-3xl font-extrabold sm:text-4xl">
-                Prêt à vous impliquer ?
+                {p.ctaTitle}
               </h2>
               <p className="mt-4 text-blue-100 max-w-lg mx-auto">
-                Rejoignez un ministère, rencontrez notre équipe et commencez votre aventure à Canaan.
+                {p.ctaSubtitle}
               </p>
               <a href={`/${locale}/contact`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-amber-400 px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-amber-300 transition-all hover:scale-105 shadow-lg">
-                Nous Contacter <ArrowRight className="h-4 w-4" />
+                {p.ctaButton} <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </motion.div>

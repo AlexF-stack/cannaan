@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, PlayCircle, Heart } from "lucide-react";
 
-import { CHURCH_BRAND, CHURCH_NAME } from "@/lib/brand";
+import { CHURCH_NAME, getBrand } from "@/lib/brand";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getFooterLinks } from "@/lib/navigation";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const currentYear = new Date().getFullYear();
   const quickLinks = getFooterLinks(locale, dict);
+  const brand = getBrand(locale);
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950 px-6 py-16 text-slate-200 lg:px-10">
@@ -32,10 +33,10 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                  {CHURCH_BRAND.line1}
+                  {brand.line1}
                 </span>
                 <span className="font-[var(--font-heading)] text-xl font-extrabold tracking-tight text-blue-400">
-                  {CHURCH_BRAND.line2}
+                  {brand.line2}
                 </span>
               </div>
             </Link>

@@ -3,14 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, HandHeart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CHURCH_BRAND, CHURCH_NAME } from "@/lib/brand";
+import { CHURCH_NAME, getBrand } from "@/lib/brand";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getMainNavLinks } from "@/lib/navigation";
+import { swapLocalePath } from "@/lib/use-locale";
 
 export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const pathname = usePathname() ?? "";
+  const brand = getBrand(locale);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -53,10 +57,10 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </div>
               <div className="hidden lg:flex flex-col leading-tight">
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                  {CHURCH_BRAND.line1}
+                  {brand.line1}
                 </span>
                 <span className="text-xl font-extrabold text-blue-600 font-[var(--font-heading)] leading-tight tracking-tight">
-                  {CHURCH_BRAND.line2}
+                  {brand.line2}
                 </span>
               </div>
             </Link>
@@ -78,9 +82,9 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             {/* Right */}
             <div className="hidden md:flex items-center gap-3">
               <div className="flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold">
-                <Link href="/fr" className={cn("px-1.5 transition-colors", locale === "fr" ? "text-blue-600" : "text-slate-400 hover:text-slate-700")}>FR</Link>
+                <Link href={swapLocalePath(pathname, "fr")} className={cn("px-1.5 transition-colors", locale === "fr" ? "text-blue-600" : "text-slate-400 hover:text-slate-700")}>FR</Link>
                 <span className="text-slate-300">|</span>
-                <Link href="/en" className={cn("px-1.5 transition-colors", locale === "en" ? "text-blue-600" : "text-slate-400 hover:text-slate-700")}>EN</Link>
+                <Link href={swapLocalePath(pathname, "en")} className={cn("px-1.5 transition-colors", locale === "en" ? "text-blue-600" : "text-slate-400 hover:text-slate-700")}>EN</Link>
               </div>
               <Link
                 href={`/${locale}/don`}
@@ -133,8 +137,8 @@ export function NavBar({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               ))}
               <div className="pt-3 pb-1 mt-2 border-t border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-3 text-sm font-bold">
-                  <Link href="/fr" className={cn("transition-colors", locale === "fr" ? "text-blue-600" : "text-slate-400")}>FR</Link>
-                  <Link href="/en" className={cn("transition-colors", locale === "en" ? "text-blue-600" : "text-slate-400")}>EN</Link>
+                  <Link href={swapLocalePath(pathname, "fr")} className={cn("transition-colors", locale === "fr" ? "text-blue-600" : "text-slate-400")}>FR</Link>
+                  <Link href={swapLocalePath(pathname, "en")} className={cn("transition-colors", locale === "en" ? "text-blue-600" : "text-slate-400")}>EN</Link>
                 </div>
                 <Link
                   href={`/${locale}/don`}

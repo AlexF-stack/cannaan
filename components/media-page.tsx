@@ -13,6 +13,7 @@ import SummaryEditorModal from "@/components/summary-editor-modal";
 import MapsSection from "@/components/maps-section";
 import { audioTeachings, type AudioTeaching } from "@/lib/audio";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { getPageCopy } from "@/lib/i18n-pages";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -36,6 +37,8 @@ const galleryImages = [
 ];
 
 export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const p = getPageCopy(locale).mediaPage;
+  const common = getPageCopy(locale).common;
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentAudio, setCurrentAudio] = useState<AudioTeaching>(audioTeachings[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -147,10 +150,10 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
       </div>
 
       <PageHeader
-        title="Mediatheque & Podcasts"
-        subtitle="Revivez nos moments forts en images et ecoutez les predications pour nourrir votre foi au quotidien."
+        title={p.headerTitle}
+        subtitle={p.headerSubtitle}
         image="/images/adoration1.jpg"
-        badge="Médiathèque"
+        badge={p.headerBadge}
       />
 
       <section className="border-b border-slate-100 bg-white px-6 py-24 lg:px-10">
@@ -166,13 +169,13 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               variants={fadeUp}
               className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600"
             >
-              <span className="block h-0.5 w-8 bg-amber-400" /> Enseignements Audio
+              <span className="block h-0.5 w-8 bg-amber-400" /> {p.audioSection}
             </motion.span>
             <motion.h2
               variants={fadeUp}
               className="font-[var(--font-heading)] text-3xl font-extrabold text-slate-900 sm:text-4xl"
             >
-              Podcasts & Predications
+              {p.audioTitle}
             </motion.h2>
           </motion.div>
 
@@ -191,13 +194,13 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
             >
               <div className="rounded-[2rem] border border-slate-100 bg-slate-50 p-8 shadow-sm">
                 <div className="mb-6 flex items-center justify-between gap-4">
-                  <h4 className="text-2xl font-bold text-slate-900">Resume</h4>
+                  <h4 className="text-2xl font-bold text-slate-900">{common.summary}</h4>
                   {isAdmin ? (
                     <button
                       onClick={() => setIsEditing(true)}
                       className="rounded-full bg-amber-400 px-4 py-2 text-xs font-bold text-slate-900 transition hover:bg-amber-300"
                     >
-                      Modifier
+                      {common.edit}
                     </button>
                   ) : null}
                 </div>
@@ -245,7 +248,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
                       />
                     </div>
                     <div className="mt-3 flex justify-between text-xs font-bold tracking-tight text-slate-400">
-                      <span>{isPlaying ? "LECTURE EN COURS..." : "SELECTIONNE"}</span>
+                      <span>{isPlaying ? common.nowPlaying : common.selected}</span>
                       <span>00:00 / --:--</span>
                     </div>
                   </div>
@@ -268,7 +271,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               </motion.div>
 
               <div className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
-                <h4 className="mb-6 text-xl font-bold text-slate-900">Enseignements recents</h4>
+                <h4 className="mb-6 text-xl font-bold text-slate-900">{common.recentTeachings}</h4>
                 <div className="space-y-4">
                   {audioTeachings.map((podcast, index) => (
                     <motion.button
@@ -338,13 +341,13 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               variants={fadeUp}
               className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600"
             >
-              <span className="block h-0.5 w-8 bg-amber-400" /> Galerie
+              <span className="block h-0.5 w-8 bg-amber-400" /> {p.gallerySection}
             </motion.span>
             <motion.h2
               variants={fadeUp}
               className="font-[var(--font-heading)] text-3xl font-extrabold text-slate-900 sm:text-4xl"
             >
-              La vie de l'eglise en images
+              {p.galleryTitle}
             </motion.h2>
           </motion.div>
           <div
@@ -373,7 +376,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
             ))}
           </div>
           {/* Maps Section */}
-          <MapsSection />
+          <MapsSection locale={locale} />
         </div>
       </section>
 
@@ -400,7 +403,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               className="relative h-full max-h-[85vh] w-full max-w-6xl overflow-hidden rounded-lg"
               onClick={(event) => event.stopPropagation()}
             >
-              <Image src={selectedImage} alt="Galerie" fill className="object-contain" />
+              <Image src={selectedImage} alt={p.galleryAlt} fill sizes="100vw" className="object-contain" />
             </motion.div>
           </motion.div>
         ) : null}
