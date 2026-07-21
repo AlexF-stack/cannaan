@@ -1,8 +1,11 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-
 import { sermons as defaultSermons } from "@/lib/content";
 import { defaultLocale, type Locale } from "@/lib/i18n";
+import {
+  appendTextFileLocal,
+  readAuditEntriesFromLog,
+  readJsonFile,
+  writeJsonFile,
+} from "@/lib/storage";
 
 type Sermon = { title: string; date: string; speaker: string };
 type EventsOverride = {
@@ -20,9 +23,8 @@ export type ManagedContent = {
   events: Record<Locale, EventsOverride>;
 };
 
-const dataDir = path.join(process.cwd(), "data");
-const dataPath = path.join(dataDir, "content.json");
-const auditPath = path.join(dataDir, "audit.log");
+const CONTENT_KEY = "data/content.json";
+const AUDIT_KEY = "data/audit.log";
 
 const defaultContent: ManagedContent = {
   sermons: defaultSermons,
@@ -33,21 +35,15 @@ const defaultContent: ManagedContent = {
 };
 
 export async function readManagedContent(): Promise<ManagedContent> {
-  try {
-    const raw = await readFile(dataPath, "utf8");
-    const parsed = JSON.parse(raw) as ManagedContent;
-    return {
-      sermons: parsed.sermons ?? defaultContent.sermons,
-      events: parsed.events ?? defaultContent.events,
-    };
-  } catch {
-    return defaultContent;
-  }
+  const parsed = await readJsonFile<ManagedContent>(CONTENT_KEY, defaultContent);
+  return {
+    sermons: parsed.sermons ?? defaultContent.sermons,
+    events: parsed.events ?? defaultContent.events,
+  };
 }
 
 export async function writeManagedContent(payload: ManagedContent): Promise<void> {
-  await mkdir(dataDir, { recursive: true });
-  await writeFile(dataPath, JSON.stringify(payload, null, 2), "utf8");
+  await writeJsonFile(CONTENT_KEY, payload);
 }
 
 export async function readLocaleContent(locale: Locale = defaultLocale) {
@@ -68,17 +64,9 @@ export type AuditEntry = {
 };
 
 export async function readAuditEntries(limit = 100): Promise<AuditEntry[]> {
-  try {
-    const raw = await readFile(auditPath, "utf8");
-    const lines = raw
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean);
-    return lines
-      .slice(-limit)
-      .reverse()
-      .map((line) => JSON.parse(line) as AuditEntry);
-  } catch {
-    return [];
-  }
+  return readAuditEntriesFromLog(AUDIT_KEY, limit);
+}
+
+export async function appendAuditEntry(entry: AuditEntry): Promise<void> {
+  await appendTextFileLocal(AUDIT_KEY, `${JSON.stringify(entry)}\n`);
 }

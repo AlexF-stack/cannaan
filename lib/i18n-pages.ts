@@ -84,6 +84,8 @@ export type PageCopy = {
     headerTitle: string;
     headerSubtitle: string;
     headerBadge: string;
+    libraryTitle: string;
+    librarySubtitle: string;
     filterAll: string;
     filterPreaching: string;
     filterTeaching: string;
@@ -93,11 +95,18 @@ export type PageCopy = {
     headerSubtitle: string;
     headerBadge: string;
     whoTitle: string;
+    whoHeading: string;
     whoP1: string;
     visionariesTitle: string;
+    visionariesNames: string;
+    visionaryP1: string;
+    visionaryP2: string;
+    learnMoreProphet: string;
     yearsLabel: string;
+    prophetsAlt: string;
     identityBadge: string;
     identityTitle: string;
+    programLabel: string;
   };
   prophetPage: {
     headerTitle: string;
@@ -110,6 +119,12 @@ export type PageCopy = {
     bioP2: string;
     bioP3: string;
     bioP4: string;
+    testimonyCaption: string;
+    quoteTitle: string;
+    quoteText: string;
+    predicationAlt: string;
+    testimonyAlt: string;
+    prophetAlt: string;
   };
   homePage: {
     statsYears: string;
@@ -141,12 +156,16 @@ export type PageCopy = {
   donPage: {
     familiesHelped: string;
     socialProjects: string;
+    citiesImpacted: string;
     cardNumber: string;
+    cardExpiry: string;
+    cardCvc: string;
     mobileStep1: string;
     mobileStep2: string;
     mobileStep3: string;
     mobileStep4: string;
     securePayment: string;
+    securePaymentFull: string;
   };
 };
 
@@ -239,34 +258,58 @@ export const pageCopy: Record<Locale, PageCopy> = {
     },
     teachingsPage: {
       headerTitle: "Tous les Enseignements",
-      headerSubtitle: "Explorez notre bibliothèque audio de messages et prédications.",
-      headerBadge: "Bibliothèque Audio",
+      headerSubtitle: "Explorez notre bibliothèque complète de prédications et de moments de révélation.",
+      headerBadge: "Archives",
+      libraryTitle: "Bibliothèque Audio",
+      librarySubtitle: "Retrouvez tous les messages inspirés pour votre édification.",
       filterAll: "Tout",
       filterPreaching: "Prédication",
       filterTeaching: "Enseignement",
       filterCombat: "Combat",
     },
     aboutPage: {
-      headerSubtitle: "Découvrez notre histoire, notre vision et les hommes de foi qui portent cette vision.",
-      headerBadge: "Église Cannaan",
+      headerSubtitle: "Découvrez notre histoire, notre vision et notre équipe pastorale.",
+      headerBadge: "Église Canaan",
       whoTitle: "Qui sommes-nous ?",
+      whoHeading:
+        "Le Centre International de Réveil - CANAAN est un ministère d'évangélisation et de formation des leaders pour la conquête des nations, créé en 2003 sous l'inspiration divine par Ithiel DOSSOU.",
       whoP1: "Le Centre International de Réveil Cannaan (CIRC) est né en 2003 d'un appel divin pour bâtir des disciples transformés par la puissance de l'Évangile.",
       visionariesTitle: "Nos Visionnaires",
+      visionariesNames: "Prophète Ithiel & Mykem Dossou",
+      visionaryP1:
+        "Père fondateur des églises Canaan, le Saint-Esprit l'utilise pour transformer une multitude d'hommes et de femmes en de véritables disciples de Christ.",
+      visionaryP2:
+        "Avec une vision claire et un dévouement total, le couple pastoral guide notre communauté vers une relation authentique avec Dieu — impactant nations, familles et sphères d'influence.",
+      learnMoreProphet: "En savoir plus sur le Prophète",
       yearsLabel: "Années de ministère",
+      prophetsAlt: "Prophète Ithiel & Mykem Dossou",
       identityBadge: "Notre Identité",
       identityTitle: "Vision, Mission & Valeurs",
+      programLabel: "Programme",
     },
     prophetPage: {
       headerTitle: "Prophète Ithiel Dossou",
-      headerSubtitle: "Serviteur de Dieu et voix prophétique pour les nations, Fondateur du CIRC.",
-      headerBadge: "Le Prophète",
+      headerSubtitle:
+        "Serviteur de Dieu et voix prophétique pour les nations, Fondateur du Centre International de Réveil Cannaan (CIRC).",
+      headerBadge: "Le Visionnaire",
       bioBadge: "Biographie",
       bioTitle: "Une vie consacrée à l'Éternel",
       back: "Retour",
-      bioP1: "Le Prophète Ithiel Wayisuhu Zannudé Dossou est le fondateur du Centre International de Réveil Cannaan (CIRC).",
-      bioP2: "Par le don prophétique, il exhorte les nations à revenir à une foi authentique et à manifester le règne de Dieu.",
-      bioP3: "Son ministère se distingue par la profondeur de l'enseignement, la démonstration de la puissance de Dieu et l'élévation des leaders.",
-      bioP4: "Il continue d'impacter des milliers de vies à travers les cultes, conférences et missions internationales.",
+      bioP1:
+        "Le Prophète Ithiel Wayisuhu Zannudé Dossou, serviteur de Dieu et voix prophétique pour les nations, est le Fondateur du Centre International de Réveil Cannaan (CIRC).",
+      bioP2:
+        "Issu d'une lignée de serviteurs de Dieu, fils du feu Pasteur Pierre Dossou et de la prédicatrice Dorcas Bodjrenou, son parcours est marqué par un témoignage puissant : après plusieurs années de maladie, paralysé et proche de la mort, le Seigneur lui apparaît, le guérit et l'appelle au ministère, le consacrant comme prophète pour les nations.",
+      bioP3:
+        "Depuis lors, il porte un ministère international de restauration et de transformation, dédié à la formation de leaders appelés à manifester la suprématie du Royaume de Dieu dans les sphères charismatique, économique et politique.",
+      bioP4:
+        "Reconnu pour sa profondeur prophétique, il annonce l'Évangile du Royaume avec autorité à travers les nations, conduisant des campagnes d'évangélisation et des conférences de réveil où Dieu agit puissamment par des signes, des miracles et des prodiges, conduisant des multitudes à Christ.",
+      testimonyCaption: "Un témoignage puissant de guérison divine.",
+      quoteTitle: "Son cri de cœur : le Réveil des Derniers Temps.",
+      quoteText:
+        "Mesdames, Mesdemoiselles et Messieurs, veuillez recevoir avec une ovation à l'Eternel notre Dieu, son serviteur, le prophète ITHIEL DOSSOU !!!!!",
+      predicationAlt: "Prédication du prophète",
+      testimonyAlt: "Témoignage du prophète",
+      prophetAlt: "Le Prophète Ithiel Dossou",
     },
     homePage: {
       statsYears: "Ans de ministère",
@@ -298,12 +341,16 @@ export const pageCopy: Record<Locale, PageCopy> = {
     donPage: {
       familiesHelped: "Familles aidées",
       socialProjects: "Projets sociaux",
+      citiesImpacted: "Villes impactées",
       cardNumber: "Numéro de carte",
-      mobileStep1: "Composez *880# sur votre téléphone",
-      mobileStep2: "Sélectionnez « Transfert d'argent »",
-      mobileStep3: "Entrez le numéro marchand CIRC",
+      cardExpiry: "MM / AA",
+      cardCvc: "CVC",
+      mobileStep1: "Composez *144# sur votre téléphone",
+      mobileStep2: "Sélectionnez « Paiement marchand »",
+      mobileStep3: "Entrez le code Canaan : 12345",
       mobileStep4: "Confirmez avec votre code PIN",
       securePayment: "Paiement 100% sécurisé",
+      securePaymentFull: "Paiement 100% sécurisé et chiffré",
     },
   },
   en: {
@@ -394,34 +441,58 @@ export const pageCopy: Record<Locale, PageCopy> = {
     },
     teachingsPage: {
       headerTitle: "All Teachings",
-      headerSubtitle: "Explore our audio library of messages and sermons.",
-      headerBadge: "Audio Library",
+      headerSubtitle: "Explore our complete library of sermons and moments of revelation.",
+      headerBadge: "Archives",
+      libraryTitle: "Audio Library",
+      librarySubtitle: "Find all inspired messages for your edification.",
       filterAll: "All",
       filterPreaching: "Preaching",
       filterTeaching: "Teaching",
       filterCombat: "Spiritual warfare",
     },
     aboutPage: {
-      headerSubtitle: "Discover our story, vision, and the men of faith carrying this mission.",
+      headerSubtitle: "Discover our story, vision, and pastoral team.",
       headerBadge: "Cannaan Church",
       whoTitle: "Who are we?",
+      whoHeading:
+        "The International Revival Center - CANAAN is an evangelism and leadership training ministry for the conquest of nations, founded in 2003 under divine inspiration by Ithiel DOSSOU.",
       whoP1: "The International Revival Center Cannaan (CIRC) was born in 2003 from a divine call to build disciples transformed by the power of the Gospel.",
       visionariesTitle: "Our Visionaries",
+      visionariesNames: "Prophet Ithiel & Mykem Dossou",
+      visionaryP1:
+        "Founding father of the Canaan churches, the Holy Spirit uses him to transform many men and women into true disciples of Christ.",
+      visionaryP2:
+        "With a clear vision and total dedication, the pastoral couple guides our community toward an authentic relationship with God — impacting nations, families, and spheres of influence.",
+      learnMoreProphet: "Learn more about the Prophet",
       yearsLabel: "Years of ministry",
+      prophetsAlt: "Prophet Ithiel & Mykem Dossou",
       identityBadge: "Our Identity",
       identityTitle: "Vision, Mission & Values",
+      programLabel: "Program",
     },
     prophetPage: {
       headerTitle: "Prophet Ithiel Dossou",
-      headerSubtitle: "Servant of God and prophetic voice to the nations, Founder of CIRC.",
-      headerBadge: "The Prophet",
+      headerSubtitle:
+        "Servant of God and prophetic voice to the nations, Founder of the International Revival Center Cannaan (CIRC).",
+      headerBadge: "The Visionary",
       bioBadge: "Biography",
       bioTitle: "A life consecrated to the Lord",
       back: "Back",
-      bioP1: "Prophet Ithiel Wayisuhu Zannudé Dossou is the founder of the International Revival Center Cannaan (CIRC).",
-      bioP2: "Through the prophetic gift, he calls nations back to authentic faith and to manifest God's kingdom.",
-      bioP3: "His ministry is marked by deep teaching, demonstrations of God's power, and raising leaders.",
-      bioP4: "He continues to impact thousands of lives through services, conferences, and international missions.",
+      bioP1:
+        "Prophet Ithiel Wayisuhu Zannudé Dossou, servant of God and prophetic voice to the nations, is the Founder of the International Revival Center Cannaan (CIRC).",
+      bioP2:
+        "From a lineage of servants of God, son of the late Pastor Pierre Dossou and preacher Dorcas Bodjrenou, his journey is marked by a powerful testimony: after years of illness, paralyzed and near death, the Lord appeared to him, healed him, and called him to ministry, consecrating him as a prophet to the nations.",
+      bioP3:
+        "Since then, he carries an international ministry of restoration and transformation, dedicated to training leaders called to manifest the supremacy of God's Kingdom in charismatic, economic, and political spheres.",
+      bioP4:
+        "Known for his prophetic depth, he proclaims the Gospel of the Kingdom with authority across nations, leading evangelism campaigns and revival conferences where God moves powerfully through signs, wonders, and miracles, leading multitudes to Christ.",
+      testimonyCaption: "A powerful testimony of divine healing.",
+      quoteTitle: "His heart cry: the End-Times Revival.",
+      quoteText:
+        "Ladies and gentlemen, please receive with an ovation to the Lord our God, His servant, Prophet ITHIEL DOSSOU!",
+      predicationAlt: "Prophet preaching",
+      testimonyAlt: "Prophet testimony",
+      prophetAlt: "Prophet Ithiel Dossou",
     },
     homePage: {
       statsYears: "Years of ministry",
@@ -453,12 +524,16 @@ export const pageCopy: Record<Locale, PageCopy> = {
     donPage: {
       familiesHelped: "Families helped",
       socialProjects: "Social projects",
+      citiesImpacted: "Cities impacted",
       cardNumber: "Card number",
-      mobileStep1: "Dial *880# on your phone",
-      mobileStep2: "Select « Money transfer »",
-      mobileStep3: "Enter the CIRC merchant number",
+      cardExpiry: "MM / YY",
+      cardCvc: "CVC",
+      mobileStep1: "Dial *144# on your phone",
+      mobileStep2: "Select « Merchant payment »",
+      mobileStep3: "Enter the Canaan code: 12345",
       mobileStep4: "Confirm with your PIN code",
       securePayment: "100% secure payment",
+      securePaymentFull: "100% secure and encrypted payment",
     },
   },
 };

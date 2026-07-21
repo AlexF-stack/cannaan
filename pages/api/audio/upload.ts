@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
 
 import { requireAdminApi } from "@/lib/api-auth";
+import { uploadPublicFile } from "@/lib/storage";
 import { isAllowedAudio, UPLOAD_LIMITS } from "@/lib/upload-validation";
 
 export const config = {
@@ -61,10 +62,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const filename = path.basename(file.filepath);
-    return res.status(200).json({
-      message: "Upload successful",
-      audioId: filename,
-      url: `/uploads/audio/${filename}`,
-    });
+    const buffer = await fs.readFile(file.filepath);
+    const blobPath = `uploads/audio/${filename}`;
+
+    try {
+      const uploaded = await uploadPublicFile(blobPath, buffer, mimeType);
+      await fs.unlink(file.filepath).catch(() => undefined);
+      return res.status(200).json({
+        message: "Upload successful",
+        audioId: filename,
+        url: uploaded.url,
+      });
+    } catch {
+      return res.status(500).json({ error: "Upload failed" });
+    }
   });
 }

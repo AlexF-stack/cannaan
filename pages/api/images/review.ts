@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import path from "path";
-import fs from "fs";
 import busboy from "busboy";
 import { v4 as uuidv4 } from "uuid";
 
 import { requireAdminApi } from "@/lib/api-auth";
+import { readJsonFile, uploadPublicFile, writeJsonFile } from "@/lib/storage";
 import {
   isAllowedImage,
   sanitizeExtension,
@@ -23,6 +22,8 @@ type ImageReviewEntry = {
   title: string;
   description: string;
 };
+
+const MANIFEST_KEY = "data/image_reviews.json";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -69,27 +70,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const buffer = Buffer.concat(fileChunks);
     const id = uuidv4();
     const ext = sanitizeExtension(fileName, new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]), ".jpg");
-    const filePath = path.join(process.cwd(), "public", "uploads", "reviews", `${id}${ext}`);
-
-    await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.promises.writeFile(filePath, buffer);
-
-    const url = `/uploads/reviews/${id}${ext}`;
-    const manifestPath = path.join(process.cwd(), "data", "image_reviews.json");
-    let manifest: ImageReviewEntry[] = [];
+    const blobPath = `uploads/reviews/${id}${ext}`;
 
     try {
-      const content = await fs.promises.readFile(manifestPath, "utf-8");
-      manifest = JSON.parse(content) as ImageReviewEntry[];
+      const uploaded = await uploadPublicFile(blobPath, buffer, mimeType);
+      const manifest = await readJsonFile<ImageReviewEntry[]>(MANIFEST_KEY, []);
+      manifest.push({ id, url: uploaded.url, title: "", description: "" });
+      await writeJsonFile(MANIFEST_KEY, manifest);
+      res.status(200).json({ id, url: uploaded.url });
     } catch {
-      manifest = [];
+      res.status(500).json({ error: "Upload failed" });
     }
-
-    manifest.push({ id, url, title: "", description: "" });
-    await fs.promises.mkdir(path.dirname(manifestPath), { recursive: true });
-    await fs.promises.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
-
-    res.status(200).json({ id, url });
   });
 
   bb.on("error", () => {

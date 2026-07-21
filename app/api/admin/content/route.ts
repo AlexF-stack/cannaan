@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
-import { appendFile, mkdir } from "node:fs/promises";
-import path from "node:path";
 import { z } from "zod";
 
+import { appendAuditEntry, readManagedContent, writeManagedContent } from "@/lib/cms";
 import { isAuthorizedCookieHeader } from "@/lib/admin-session";
-import { readManagedContent, writeManagedContent } from "@/lib/cms";
 import { isLocale } from "@/lib/i18n";
 
 const sermonSchema = z.object({
@@ -27,11 +25,8 @@ const payloadSchema = z.object({
   }),
 });
 
-async function appendAuditLog(entry: unknown) {
-  const dataDir = path.join(process.cwd(), "data");
-  const auditPath = path.join(dataDir, "audit.log");
-  await mkdir(dataDir, { recursive: true });
-  await appendFile(auditPath, `${JSON.stringify(entry)}\n`, "utf8");
+async function appendAuditLog(entry: Parameters<typeof appendAuditEntry>[0]) {
+  await appendAuditEntry(entry);
 }
 
 export async function GET(request: Request) {

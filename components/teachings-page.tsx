@@ -7,10 +7,20 @@ import { Calendar, Clock, Headphones, Play } from "lucide-react";
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
-import { audioTeachings } from "@/lib/audio";
+import { getAudioTeachings } from "@/lib/audio";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { getPageCopy } from "@/lib/i18n-pages";
 
 export function TeachingsPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const p = getPageCopy(locale).teachingsPage;
+  const teachings = getAudioTeachings(locale);
+  const filters = [
+    p.filterAll,
+    p.filterPreaching,
+    p.filterTeaching,
+    p.filterCombat,
+  ];
+
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="fixed inset-x-0 top-0 z-50">
@@ -18,23 +28,21 @@ export function TeachingsPage({ locale, dict }: { locale: Locale; dict: Dictiona
       </div>
 
       <PageHeader
-        title="Tous les Enseignements"
-        subtitle="Explorez notre bibliotheque complete de predications et de moments de revelation."
+        title={p.headerTitle}
+        subtitle={p.headerSubtitle}
         image="/images/stade_rempli.jpg"
-        badge="Archives"
+        badge={p.headerBadge}
       />
 
       <section className="px-6 py-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-center">
             <div>
-              <h2 className="text-3xl font-extrabold text-slate-900">Bibliotheque Audio</h2>
-              <p className="mt-2 text-slate-500">
-                Retrouvez tous les messages inspires pour votre edification.
-              </p>
+              <h2 className="text-3xl font-extrabold text-slate-900">{p.libraryTitle}</h2>
+              <p className="mt-2 text-slate-500">{p.librarySubtitle}</p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {["Tout", "Predication", "Enseignement", "Combat"].map((cat) => (
+              {filters.map((cat) => (
                 <button
                   key={cat}
                   className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium transition-all hover:bg-slate-900 hover:text-white"
@@ -46,7 +54,7 @@ export function TeachingsPage({ locale, dict }: { locale: Locale; dict: Dictiona
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {audioTeachings.map((teaching, index) => (
+            {teachings.map((teaching, index) => (
               <motion.div
                 key={teaching.id}
                 initial={{ opacity: 0, y: 20 }}

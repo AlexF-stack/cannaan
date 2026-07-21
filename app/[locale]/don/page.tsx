@@ -8,6 +8,7 @@ import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { buildPageMetadata } from "@/lib/metadata";
 import { dictionary, isLocale } from "@/lib/i18n";
+import { getPageCopy } from "@/lib/i18n-pages";
 
 export async function generateMetadata({
   params,
@@ -27,6 +28,7 @@ export default async function DonationPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = dictionary[locale];
+  const dp = getPageCopy(locale).donPage;
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -47,9 +49,9 @@ export default async function DonationPage({
           {/* Impact stats */}
           <div className="grid grid-cols-3 gap-6 mb-16">
             {[
-              { n: "500+", label: "Familles aidées" },
-              { n: "10+", label: "Projets sociaux" },
-              { n: "5", label: "Villes impactées" },
+              { n: "500+", label: dp.familiesHelped },
+              { n: "10+", label: dp.socialProjects },
+              { n: "5", label: dp.citiesImpacted },
             ].map(({ n, label }) => (
               <div key={label} className="rounded-2xl bg-blue-50 border border-blue-100 p-6 text-center">
                 <div className="font-[var(--font-heading)] text-3xl font-extrabold text-blue-600">{n}</div>
@@ -67,10 +69,10 @@ export default async function DonationPage({
               <h3 className="font-[var(--font-heading)] text-xl font-bold text-slate-900 mb-1">{dict.donationPage.cardTitle}</h3>
               <p className="text-slate-500 text-sm mb-6">{dict.donationPage.cardDescription}</p>
               <div className="space-y-3">
-                <input placeholder="Numéro de carte" className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+                <input placeholder={dp.cardNumber} className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
                 <div className="flex gap-3">
-                  <input placeholder="MM / AA" className="h-12 w-1/2 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
-                  <input placeholder="CVC" className="h-12 w-1/2 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+                  <input placeholder={dp.cardExpiry} className="h-12 w-1/2 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+                  <input placeholder={dp.cardCvc} className="h-12 w-1/2 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
                 </div>
                 {/* Amount presets */}
                 <div className="flex gap-2 flex-wrap pt-1">
@@ -94,10 +96,10 @@ export default async function DonationPage({
               {/* Mobile money steps */}
               <div className="space-y-3">
                 {[
-                  "Composez *144# sur votre téléphone",
-                  "Sélectionnez \"Paiement marchand\"",
-                  "Entrez le code Canaan : 12345",
-                  "Confirmez avec votre code PIN",
+                  dp.mobileStep1,
+                  dp.mobileStep2,
+                  dp.mobileStep3,
+                  dp.mobileStep4,
                 ].map((step, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-amber-100 flex items-center justify-center text-xs font-bold text-amber-700">{i + 1}</span>
@@ -111,7 +113,7 @@ export default async function DonationPage({
           {/* Security badge */}
           <div className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-50 border border-emerald-100 px-6 py-4 text-sm font-medium text-emerald-700 max-w-sm mx-auto mb-12">
             <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0" />
-            Paiement 100% sécurisé et chiffré
+            {dp.securePaymentFull}
           </div>
 
           <div className="text-center">

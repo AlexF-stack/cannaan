@@ -11,7 +11,7 @@ import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import SummaryEditorModal from "@/components/summary-editor-modal";
 import MapsSection from "@/components/maps-section";
-import { audioTeachings, type AudioTeaching } from "@/lib/audio";
+import { getAudioTeachings, type AudioTeaching } from "@/lib/audio";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { getPageCopy } from "@/lib/i18n-pages";
 
@@ -39,8 +39,9 @@ const galleryImages = [
 export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const p = getPageCopy(locale).mediaPage;
   const common = getPageCopy(locale).common;
+  const teachings = getAudioTeachings(locale);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentAudio, setCurrentAudio] = useState<AudioTeaching>(audioTeachings[0]);
+  const [currentAudio, setCurrentAudio] = useState<AudioTeaching>(teachings[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [summary, setSummary] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -273,7 +274,7 @@ export function MediaPage({ locale, dict }: { locale: Locale; dict: Dictionary }
               <div className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-sm">
                 <h4 className="mb-6 text-xl font-bold text-slate-900">{common.recentTeachings}</h4>
                 <div className="space-y-4">
-                  {audioTeachings.map((podcast, index) => (
+                  {teachings.map((podcast, index) => (
                     <motion.button
                       key={podcast.id}
                       type="button"
